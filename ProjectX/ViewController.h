@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VenueTableViewCell.h"
+#import "SelectedVenueVC.h"
+#import "VenuesFullMapVC.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) SelectedVenueVC *selectedVenue;
 
 
 @end

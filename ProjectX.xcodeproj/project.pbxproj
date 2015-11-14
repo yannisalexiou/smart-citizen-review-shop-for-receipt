@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E3C98A11BE2BCC7008D21C7 /* SelectedVenueVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */; };
+		8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */; };
 		8E4728221BE290C6008CD0DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728211BE290C6008CD0DC /* main.m */; };
 		8E4728251BE290C6008CD0DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728241BE290C6008CD0DC /* AppDelegate.m */; };
 		8E4728281BE290C6008CD0DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728271BE290C6008CD0DC /* ViewController.m */; };
@@ -15,6 +17,11 @@
 		8E4728301BE290C6008CD0DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E47282E1BE290C6008CD0DC /* LaunchScreen.storyboard */; };
 		8E47283B1BE290C6008CD0DC /* ProjectXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E47283A1BE290C6008CD0DC /* ProjectXTests.m */; };
 		8E4728461BE290C6008CD0DC /* ProjectXUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728451BE290C6008CD0DC /* ProjectXUITests.m */; };
+		8E54B1721BE2D165007F874D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1711BE2D165007F874D /* CoreLocation.framework */; };
+		8E54B1741BE2D171007F874D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1731BE2D171007F874D /* MapKit.framework */; };
+		8E54B1761BE2D180007F874D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1751BE2D180007F874D /* Foundation.framework */; };
+		8E54B1781BE2D186007F874D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1771BE2D186007F874D /* UIKit.framework */; };
+		8E82002C1BE404A0008D2446 /* VenueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E3C989F1BE2BCC7008D21C7 /* SelectedVenueVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedVenueVC.h; sourceTree = "<group>"; };
+		8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedVenueVC.m; sourceTree = "<group>"; };
+		8E3C98A21BE2BE59008D21C7 /* VenuesFullMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenuesFullMapVC.h; sourceTree = "<group>"; };
+		8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenuesFullMapVC.m; sourceTree = "<group>"; };
+		8E3C98A51BE2BFA8008D21C7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8E47281D1BE290C6008CD0DC /* ProjectX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4728211BE290C6008CD0DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E4728231BE290C6008CD0DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +63,12 @@
 		8E4728411BE290C6008CD0DC /* ProjectXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4728451BE290C6008CD0DC /* ProjectXUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectXUITests.m; sourceTree = "<group>"; };
 		8E4728471BE290C6008CD0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E54B1711BE2D165007F874D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8E54B1731BE2D171007F874D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8E54B1751BE2D180007F874D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8E54B1771BE2D186007F874D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueTableViewCell.h; sourceTree = "<group>"; };
+		8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +76,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E54B1781BE2D186007F874D /* UIKit.framework in Frameworks */,
+				8E54B1761BE2D180007F874D /* Foundation.framework in Frameworks */,
+				8E54B1741BE2D171007F874D /* MapKit.framework in Frameworks */,
+				8E54B1721BE2D165007F874D /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +103,10 @@
 		8E4728141BE290C6008CD0DC = {
 			isa = PBXGroup;
 			children = (
+				8E54B1771BE2D186007F874D /* UIKit.framework */,
+				8E54B1751BE2D180007F874D /* Foundation.framework */,
+				8E54B1731BE2D171007F874D /* MapKit.framework */,
+				8E54B1711BE2D165007F874D /* CoreLocation.framework */,
 				8E47281F1BE290C6008CD0DC /* ProjectX */,
 				8E4728391BE290C6008CD0DC /* ProjectXTests */,
 				8E4728441BE290C6008CD0DC /* ProjectXUITests */,
@@ -103,13 +129,20 @@
 			children = (
 				8E4728231BE290C6008CD0DC /* AppDelegate.h */,
 				8E4728241BE290C6008CD0DC /* AppDelegate.m */,
+				8E4728291BE290C6008CD0DC /* Main.storyboard */,
 				8E4728261BE290C6008CD0DC /* ViewController.h */,
 				8E4728271BE290C6008CD0DC /* ViewController.m */,
-				8E4728291BE290C6008CD0DC /* Main.storyboard */,
+				8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */,
+				8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */,
+				8E3C98A21BE2BE59008D21C7 /* VenuesFullMapVC.h */,
+				8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */,
+				8E3C989F1BE2BCC7008D21C7 /* SelectedVenueVC.h */,
+				8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */,
 				8E47282C1BE290C6008CD0DC /* Assets.xcassets */,
 				8E47282E1BE290C6008CD0DC /* LaunchScreen.storyboard */,
 				8E4728311BE290C6008CD0DC /* Info.plist */,
 				8E4728201BE290C6008CD0DC /* Supporting Files */,
+				8E3C98A51BE2BFA8008D21C7 /* PrefixHeader.pch */,
 			);
 			path = ProjectX;
 			sourceTree = "<group>";
@@ -272,7 +305,10 @@
 			files = (
 				8E4728281BE290C6008CD0DC /* ViewController.m in Sources */,
 				8E4728251BE290C6008CD0DC /* AppDelegate.m in Sources */,
+				8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */,
 				8E4728221BE290C6008CD0DC /* main.m in Sources */,
+				8E3C98A11BE2BCC7008D21C7 /* SelectedVenueVC.m in Sources */,
+				8E82002C1BE404A0008D2446 /* VenueTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = ProjectX/PrefixHeader.pch;
 				INFOPLIST_FILE = ProjectX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = icsd12004.ProjectX;
@@ -422,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = ProjectX/PrefixHeader.pch;
 				INFOPLIST_FILE = ProjectX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = icsd12004.ProjectX;
@@ -496,6 +534,7 @@
 				8E47284C1BE290C6008CD0DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E47284D1BE290C6008CD0DC /* Build configuration list for PBXNativeTarget "ProjectXTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +543,7 @@
 				8E47284F1BE290C6008CD0DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E4728501BE290C6008CD0DC /* Build configuration list for PBXNativeTarget "ProjectXUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +552,7 @@
 				8E4728521BE290C6008CD0DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
