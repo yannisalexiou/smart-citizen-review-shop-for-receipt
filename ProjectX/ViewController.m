@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *venuesTableView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 - (IBAction)rightBarButtonItemPressed:(UIBarButtonItem *)sender;
 
@@ -25,6 +26,10 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -49,13 +54,21 @@ static NSString *CellIdentifier = @"Cell";
 }
 
 #pragma mark - UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+- (void)refreshTable
+{
+    //TODO: refresh your data
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2; //Change this Value
+    return 5; //Change this Value
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
