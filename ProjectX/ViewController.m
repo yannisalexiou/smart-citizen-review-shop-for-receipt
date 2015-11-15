@@ -77,6 +77,7 @@ static NSString *CellIdentifier = @"Cell";
     //[tableView registerClass:[VenueTableViewCell class] forCellReuseIdentifier:@"cell"];
     VenueTableViewCell *cell = (VenueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    cell.cellImageView.image = [UIImage imageNamed:@"defaultImage"];
     [cell.cellTitleLabel setText:[NSString stringWithFormat:@"Row %i in Section %i", [indexPath row], [indexPath section]]];
     cell.cellSubtitleLabel.text = @"swag";
     return cell;
