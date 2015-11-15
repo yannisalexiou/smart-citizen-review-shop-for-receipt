@@ -12,9 +12,9 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *venuesTableView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
-- (IBAction)rightBarButtonItemPressed:(UIBarButtonItem *)sender;
 
 @end
 
@@ -112,14 +112,5 @@ static NSString *CellIdentifier = @"Cell";
     //    UIViewControllerGASelectedReport *pushVC = [[UIViewControllerGASelectedReport alloc] initWithNibName:@"selectedReportVC" bundle:nil];
     //    [self.navigationController pushViewController:pushVC animated:YES];
     
-}
-
-- (IBAction)rightBarButtonItemPressed:(UIBarButtonItem *)sender
-{
-    //[self performSegueWithIdentifier:@"FullMapVenuesSegue" sender:self];
-    
-    //UIViewController *fullMapVC = [self.storyboard instantiateViewControllerWithIdentifier:@"VenuesFullMapVCID"];
-    //fullMapVC.modalTransitionStyle = UIModalPresentationOverFullScreen;
-    //[self presentViewController:fullMapVC animated:YES completion:nil];
 }
 @end
