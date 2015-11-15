@@ -26,6 +26,7 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
@@ -34,6 +35,12 @@ static NSString *CellIdentifier = @"Cell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:true];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,6 +85,9 @@ static NSString *CellIdentifier = @"Cell";
     VenueTableViewCell *cell = (VenueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     cell.cellImageView.image = [UIImage imageNamed:@"defaultImage"];
+    cell.cellImageView.clipsToBounds = YES;
+    cell.cellImageView.layer.cornerRadius = cell.cellImageView.frame.size.width/2;
+    
     [cell.cellTitleLabel setText:[NSString stringWithFormat:@"Row %i in Section %i", [indexPath row], [indexPath section]]];
     cell.cellSubtitleLabel.text = @"swag";
     return cell;
@@ -96,7 +106,9 @@ static NSString *CellIdentifier = @"Cell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //[self performSegueWithIdentifier:@"selectedVenueSegue" sender:indexPath];
+    [self performSegueWithIdentifier:@"selectedVenueSegue" sender:indexPath];
+    
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     //    UIViewControllerGASelectedReport *pushVC = [[UIViewControllerGASelectedReport alloc] initWithNibName:@"selectedReportVC" bundle:nil];
     //    [self.navigationController pushViewController:pushVC animated:YES];
     

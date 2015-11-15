@@ -28,8 +28,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //VieController Setup
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
     //Hack για ενεργοποίηση του swipe gesture
-    //self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+    self.venueImageView.layer.cornerRadius = self.venueImageView.frame.size.width/2;
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,5 +61,6 @@
 - (IBAction)backButtonPressed:(UIButton *)sender
 {
     //[self performSegueWithIdentifier:@"selectedVenueSegue" sender:indexPath];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end
