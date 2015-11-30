@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31395DF1C97F943B7299B5F1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE85C46EF8E2D8EBC8EFDF4 /* libPods.a */; };
 		8E3C98A11BE2BCC7008D21C7 /* SelectedVenueVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */; };
 		8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */; };
 		8E4728221BE290C6008CD0DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728211BE290C6008CD0DC /* main.m */; };
 		8E4728251BE290C6008CD0DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728241BE290C6008CD0DC /* AppDelegate.m */; };
-		8E4728281BE290C6008CD0DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728271BE290C6008CD0DC /* ViewController.m */; };
+		8E4728281BE290C6008CD0DC /* VenueTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728271BE290C6008CD0DC /* VenueTableView.m */; };
 		8E47282B1BE290C6008CD0DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4728291BE290C6008CD0DC /* Main.storyboard */; };
 		8E47282D1BE290C6008CD0DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E47282C1BE290C6008CD0DC /* Assets.xcassets */; };
 		8E4728301BE290C6008CD0DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E47282E1BE290C6008CD0DC /* LaunchScreen.storyboard */; };
@@ -22,6 +23,8 @@
 		8E54B1761BE2D180007F874D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1751BE2D180007F874D /* Foundation.framework */; };
 		8E54B1781BE2D186007F874D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1771BE2D186007F874D /* UIKit.framework */; };
 		8E82002C1BE404A0008D2446 /* VenueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */; };
+		8E8A91E31C0CCE8000DD7C50 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8A91E21C0CCE8000DD7C50 /* Venue.m */; };
+		8E8A91E61C0CD02D00DD7C50 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8A91E51C0CD02D00DD7C50 /* Location.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15C2ED8CF6087EC4BC108C7E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		1FE85C46EF8E2D8EBC8EFDF4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		24CCD1901973457A5C12325F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8E3C989F1BE2BCC7008D21C7 /* SelectedVenueVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedVenueVC.h; sourceTree = "<group>"; };
 		8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedVenueVC.m; sourceTree = "<group>"; };
 		8E3C98A21BE2BE59008D21C7 /* VenuesFullMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenuesFullMapVC.h; sourceTree = "<group>"; };
@@ -51,8 +57,8 @@
 		8E4728211BE290C6008CD0DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E4728231BE290C6008CD0DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8E4728241BE290C6008CD0DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8E4728261BE290C6008CD0DC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8E4728271BE290C6008CD0DC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8E4728261BE290C6008CD0DC /* VenueTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VenueTableView.h; sourceTree = "<group>"; };
+		8E4728271BE290C6008CD0DC /* VenueTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VenueTableView.m; sourceTree = "<group>"; };
 		8E47282A1BE290C6008CD0DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E47282C1BE290C6008CD0DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E47282F1BE290C6008CD0DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,6 +75,10 @@
 		8E54B1771BE2D186007F874D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueTableViewCell.h; sourceTree = "<group>"; };
 		8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueTableViewCell.m; sourceTree = "<group>"; };
+		8E8A91E11C0CCE8000DD7C50 /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Venue.h; sourceTree = "<group>"; };
+		8E8A91E21C0CCE8000DD7C50 /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Venue.m; sourceTree = "<group>"; };
+		8E8A91E41C0CD02D00DD7C50 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		8E8A91E51C0CD02D00DD7C50 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +90,7 @@
 				8E54B1761BE2D180007F874D /* Foundation.framework in Frameworks */,
 				8E54B1741BE2D171007F874D /* MapKit.framework in Frameworks */,
 				8E54B1721BE2D165007F874D /* CoreLocation.framework in Frameworks */,
+				31395DF1C97F943B7299B5F1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,17 +111,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01E06693D86C61B5D91AAC11 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				24CCD1901973457A5C12325F /* Pods.debug.xcconfig */,
+				15C2ED8CF6087EC4BC108C7E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1BA98CB2F44A291DCE51C03A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1FE85C46EF8E2D8EBC8EFDF4 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8E4728141BE290C6008CD0DC = {
 			isa = PBXGroup;
 			children = (
-				8E54B1771BE2D186007F874D /* UIKit.framework */,
-				8E54B1751BE2D180007F874D /* Foundation.framework */,
-				8E54B1731BE2D171007F874D /* MapKit.framework */,
-				8E54B1711BE2D165007F874D /* CoreLocation.framework */,
+				8E8A91E01C0CCD4500DD7C50 /* Frameworks */,
 				8E47281F1BE290C6008CD0DC /* ProjectX */,
 				8E4728391BE290C6008CD0DC /* ProjectXTests */,
 				8E4728441BE290C6008CD0DC /* ProjectXUITests */,
 				8E47281E1BE290C6008CD0DC /* Products */,
+				01E06693D86C61B5D91AAC11 /* Pods */,
+				1BA98CB2F44A291DCE51C03A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,8 +157,12 @@
 				8E4728231BE290C6008CD0DC /* AppDelegate.h */,
 				8E4728241BE290C6008CD0DC /* AppDelegate.m */,
 				8E4728291BE290C6008CD0DC /* Main.storyboard */,
-				8E4728261BE290C6008CD0DC /* ViewController.h */,
-				8E4728271BE290C6008CD0DC /* ViewController.m */,
+				8E8A91E11C0CCE8000DD7C50 /* Venue.h */,
+				8E8A91E21C0CCE8000DD7C50 /* Venue.m */,
+				8E8A91E41C0CD02D00DD7C50 /* Location.h */,
+				8E8A91E51C0CD02D00DD7C50 /* Location.m */,
+				8E4728261BE290C6008CD0DC /* VenueTableView.h */,
+				8E4728271BE290C6008CD0DC /* VenueTableView.m */,
 				8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */,
 				8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */,
 				8E3C98A21BE2BE59008D21C7 /* VenuesFullMapVC.h */,
@@ -173,6 +204,17 @@
 			path = ProjectXUITests;
 			sourceTree = "<group>";
 		};
+		8E8A91E01C0CCD4500DD7C50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E54B1771BE2D186007F874D /* UIKit.framework */,
+				8E54B1751BE2D180007F874D /* Foundation.framework */,
+				8E54B1731BE2D171007F874D /* MapKit.framework */,
+				8E54B1711BE2D165007F874D /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -180,9 +222,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E47284A1BE290C6008CD0DC /* Build configuration list for PBXNativeTarget "ProjectX" */;
 			buildPhases = (
+				EB1150B73DEAF1E45F864375 /* Check Pods Manifest.lock */,
 				8E4728191BE290C6008CD0DC /* Sources */,
 				8E47281A1BE290C6008CD0DC /* Frameworks */,
 				8E47281B1BE290C6008CD0DC /* Resources */,
+				58FA583B51D1E56FE61DE434 /* Embed Pods Frameworks */,
+				C55EF5FCC12B060D9F15CF3F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -298,16 +343,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		58FA583B51D1E56FE61DE434 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C55EF5FCC12B060D9F15CF3F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB1150B73DEAF1E45F864375 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8E4728191BE290C6008CD0DC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E4728281BE290C6008CD0DC /* ViewController.m in Sources */,
+				8E4728281BE290C6008CD0DC /* VenueTableView.m in Sources */,
 				8E4728251BE290C6008CD0DC /* AppDelegate.m in Sources */,
+				8E8A91E31C0CCE8000DD7C50 /* Venue.m in Sources */,
 				8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */,
 				8E4728221BE290C6008CD0DC /* main.m in Sources */,
 				8E3C98A11BE2BCC7008D21C7 /* SelectedVenueVC.m in Sources */,
+				8E8A91E61C0CD02D00DD7C50 /* Location.m in Sources */,
 				8E82002C1BE404A0008D2446 /* VenueTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +540,7 @@
 		};
 		8E47284B1BE290C6008CD0DC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CCD1901973457A5C12325F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = ProjectX/PrefixHeader.pch;
@@ -457,6 +553,7 @@
 		};
 		8E47284C1BE290C6008CD0DC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15C2ED8CF6087EC4BC108C7E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = ProjectX/PrefixHeader.pch;
