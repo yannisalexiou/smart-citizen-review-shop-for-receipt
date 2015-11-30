@@ -240,11 +240,12 @@ static NSString *CellIdentifier = @"Cell";
     //NSString *latLon = @"37.33,-122.03"; // approximate latLon of The Mothership (a.k.a Apple headquarters)
     NSString *clientID = kCLIENTID;
     NSString *clientSecret = kCLIENTSECRET;
-    
+    NSString *radius = @"3000";
     NSDictionary *queryParams = @{@"ll" : latLon,
                                   @"client_id" : clientID,
+                                  @"radius" : radius,
                                   @"client_secret" : clientSecret,
-                                  @"categoryId" : @"4bf58dd8d48988d1e0931735",
+                                  @"categoryId" : @"4d4b7105d754a06374d81259,4d4b7105d754a06376d81259",
                                   @"v" : @"20140118"};
     
     [[RKObjectManager sharedManager] getObjectsAtPath:@"/v2/venues/search"
