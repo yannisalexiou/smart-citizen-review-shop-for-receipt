@@ -20,7 +20,7 @@
 
 @implementation VenueTableView
 {
-    CLLocationManager *locationManager; //Δημιουργία object τύπου CLLocationManager
+    CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
     NSString *textViewLocation;
@@ -49,9 +49,16 @@ static NSString *CellIdentifier = @"Cell";
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
+    [self refreshTable];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:true];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -59,8 +66,6 @@ static NSString *CellIdentifier = @"Cell";
     [super viewWillAppear:true];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
-    [self configureRestKit];
-    [self loadVenues];
 }
 
 - (void)didReceiveMemoryWarning

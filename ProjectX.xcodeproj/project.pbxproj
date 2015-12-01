@@ -157,10 +157,7 @@
 				8E4728231BE290C6008CD0DC /* AppDelegate.h */,
 				8E4728241BE290C6008CD0DC /* AppDelegate.m */,
 				8E4728291BE290C6008CD0DC /* Main.storyboard */,
-				8E8A91E11C0CCE8000DD7C50 /* Venue.h */,
-				8E8A91E21C0CCE8000DD7C50 /* Venue.m */,
-				8E8A91E41C0CD02D00DD7C50 /* Location.h */,
-				8E8A91E51C0CD02D00DD7C50 /* Location.m */,
+				8E714A4E1C0DA3A00085FB96 /* Model */,
 				8E4728261BE290C6008CD0DC /* VenueTableView.h */,
 				8E4728271BE290C6008CD0DC /* VenueTableView.m */,
 				8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */,
@@ -202,6 +199,17 @@
 				8E4728471BE290C6008CD0DC /* Info.plist */,
 			);
 			path = ProjectXUITests;
+			sourceTree = "<group>";
+		};
+		8E714A4E1C0DA3A00085FB96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E8A91E11C0CCE8000DD7C50 /* Venue.h */,
+				8E8A91E21C0CCE8000DD7C50 /* Venue.m */,
+				8E8A91E41C0CD02D00DD7C50 /* Location.h */,
+				8E8A91E51C0CD02D00DD7C50 /* Location.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		8E8A91E01C0CCD4500DD7C50 /* Frameworks */ = {
