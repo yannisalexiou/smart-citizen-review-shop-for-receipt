@@ -88,10 +88,10 @@ static NSString *CellIdentifier = @"Cell";
     geocoder = [[CLGeocoder alloc] init];
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
-    [locationManager startUpdatingLocation];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
     locationManager.desiredAccuracy = kCLLocationAccuracyBest; //Can change the GPS Accurancy
+    [locationManager startUpdatingLocation];
 }
 
 
