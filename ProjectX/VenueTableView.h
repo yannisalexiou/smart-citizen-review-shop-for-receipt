@@ -13,11 +13,13 @@
 //T5JQKCPNIEXD3PUVPFFNRQQNF1V3QLCE0CBDUAFWKJEHJM5A
 #define kCLIENTID @"XRUE0KJHBVZVKJEX0RCDKCOQXFFTLS4RR0SVVFM30OMEJHTU"
 #define kCLIENTSECRET @"T5JQKCPNIEXD3PUVPFFNRQQNF1V3QLCE0CBDUAFWKJEHJM5A"
+#define kVersion @"20151201"
 
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 #import "Venue.h"
 #import "Location.h"
+#import "Constants.h"
 #import "MapKit/MapKit.h"
 #import <CoreLocation/CoreLocation.h>
 #import "VenueTableViewCell.h"

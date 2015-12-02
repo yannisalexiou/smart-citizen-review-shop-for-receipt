@@ -24,8 +24,6 @@
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
     NSString *textViewLocation;
-    //CGAffineTransform *scale;
-    //CGAffineTransform *translate;
     BOOL reachableConnection;
     int *isLinkedToFacebook;
     NSString *administrativeAreaLock;
@@ -40,6 +38,7 @@ static NSString *CellIdentifier = @"Cell";
     // Do any additional setup after loading the view, typically from a nib.
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
+    [self configureRestKit];
     [self gpsInitialize];
     geocoder = [[CLGeocoder alloc] init];
     [locationManager requestWhenInUseAuthorization];
@@ -48,8 +47,6 @@ static NSString *CellIdentifier = @"Cell";
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-    
-    [self refreshTable];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -93,13 +90,11 @@ static NSString *CellIdentifier = @"Cell";
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
     locationManager.desiredAccuracy = kCLLocationAccuracyBest; //Can change the GPS Accurancy
-    //kCLLocationAccuracyBest
 }
 
 
 #pragma mark - CLLocationManagerDelegate
-//Μέθοδος σε περίπτωση προβλήματος ανάκτησης διεύθυνσης
-
+//In case of error resolving the address
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"didFailWithError: %@", error);
@@ -134,6 +129,9 @@ static NSString *CellIdentifier = @"Cell";
              //Βοηθητικές μεταβλητές που περιέχουν τις συντεταγμένες που πήραμε από το GPS
              self.longitude = [[NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude] doubleValue];
              self.latitude = [[NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude] doubleValue];
+             
+             //Just after we have long & lat start load the Venues in tableView
+             [self loadVenues];
          }
          else
          {
@@ -146,8 +144,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)refreshTable
 {
     //TODO: refresh your data
-    [self configureRestKit];
-    [self loadVenues];
+    [self gpsInitialize];
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
@@ -208,7 +205,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)configureRestKit
 {
     // initialize AFNetworking HTTPClient
-    NSURL *baseURL = [NSURL URLWithString:@"https://api.foursquare.com"];
+    NSURL *baseURL = [NSURL URLWithString:kBaseApiUrl];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
     
     // initialize RestKit
@@ -222,7 +219,7 @@ static NSString *CellIdentifier = @"Cell";
     RKResponseDescriptor *responseDescriptor =
     [RKResponseDescriptor responseDescriptorWithMapping:venueMapping
                                                  method:RKRequestMethodGET
-                                            pathPattern:@"/v2/venues/search"
+                                            pathPattern:kVenueSearchPath
                                                 keyPath:@"response.venues"
                                             statusCodes:[NSIndexSet indexSetWithIndex:200]];
     
@@ -240,20 +237,22 @@ static NSString *CellIdentifier = @"Cell";
 {
     NSString *latitude = [NSString stringWithFormat:@"%f", self.latitude];
     NSString *longitude = [NSString stringWithFormat:@"%f", self.longitude];
+    NSNumber *resultRadius = [NSNumber numberWithInt:3000];
     
     NSString *latLon = [NSString stringWithFormat:@"%@,%@", latitude, longitude];
-    //NSString *latLon = @"37.33,-122.03"; // approximate latLon of The Mothership (a.k.a Apple headquarters)
+    NSString *addedCategoriesId = [NSString stringWithFormat:@"%@,%@",kFood, kNightlifeSpot];
     NSString *clientID = kCLIENTID;
     NSString *clientSecret = kCLIENTSECRET;
-    NSString *radius = @"3000";
+    NSString *radius = [NSString stringWithFormat:@"%@", resultRadius];
+    
     NSDictionary *queryParams = @{@"ll" : latLon,
                                   @"client_id" : clientID,
                                   @"radius" : radius,
                                   @"client_secret" : clientSecret,
-                                  @"categoryId" : @"4d4b7105d754a06374d81259,4d4b7105d754a06376d81259",
-                                  @"v" : @"20140118"};
+                                  @"categoryId" : addedCategoriesId,
+                                  @"v" : kVersion};
     
-    [[RKObjectManager sharedManager] getObjectsAtPath:@"/v2/venues/search"
+    [[RKObjectManager sharedManager] getObjectsAtPath:kVenueSearchPath
                                            parameters:queryParams
                                               success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
                                                   _venues = mappingResult.array;

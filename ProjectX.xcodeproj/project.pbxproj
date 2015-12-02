@@ -18,6 +18,7 @@
 		8E4728301BE290C6008CD0DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E47282E1BE290C6008CD0DC /* LaunchScreen.storyboard */; };
 		8E47283B1BE290C6008CD0DC /* ProjectXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E47283A1BE290C6008CD0DC /* ProjectXTests.m */; };
 		8E4728461BE290C6008CD0DC /* ProjectXUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728451BE290C6008CD0DC /* ProjectXUITests.m */; };
+		8E514EDA1C0DF10A00829233 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E514ED91C0DF10A00829233 /* Constants.m */; };
 		8E54B1721BE2D165007F874D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1711BE2D165007F874D /* CoreLocation.framework */; };
 		8E54B1741BE2D171007F874D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1731BE2D171007F874D /* MapKit.framework */; };
 		8E54B1761BE2D180007F874D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1751BE2D180007F874D /* Foundation.framework */; };
@@ -69,6 +70,8 @@
 		8E4728411BE290C6008CD0DC /* ProjectXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4728451BE290C6008CD0DC /* ProjectXUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectXUITests.m; sourceTree = "<group>"; };
 		8E4728471BE290C6008CD0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E514ED81C0DF10A00829233 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		8E514ED91C0DF10A00829233 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		8E54B1711BE2D165007F874D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8E54B1731BE2D171007F874D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8E54B1751BE2D180007F874D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -204,6 +207,8 @@
 		8E714A4E1C0DA3A00085FB96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8E514ED81C0DF10A00829233 /* Constants.h */,
+				8E514ED91C0DF10A00829233 /* Constants.m */,
 				8E8A91E11C0CCE8000DD7C50 /* Venue.h */,
 				8E8A91E21C0CCE8000DD7C50 /* Venue.m */,
 				8E8A91E41C0CD02D00DD7C50 /* Location.h */,
@@ -412,6 +417,7 @@
 				8E3C98A11BE2BCC7008D21C7 /* SelectedVenueVC.m in Sources */,
 				8E8A91E61C0CD02D00DD7C50 /* Location.m in Sources */,
 				8E82002C1BE404A0008D2446 /* VenueTableViewCell.m in Sources */,
+				8E514EDA1C0DF10A00829233 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
