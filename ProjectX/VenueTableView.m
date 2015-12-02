@@ -28,6 +28,7 @@
     int *isLinkedToFacebook;
     NSString *administrativeAreaLock;
     NSString *thoroughfare;
+    dispatch_group_t resolveGPSAddress;
 }
 
 static NSString *CellIdentifier = @"Cell";
@@ -39,14 +40,13 @@ static NSString *CellIdentifier = @"Cell";
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
     [self configureRestKit];
-    [self gpsInitialize];
-    geocoder = [[CLGeocoder alloc] init];
-    [locationManager requestWhenInUseAuthorization];
-    [locationManager startUpdatingLocation];
     
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    
+    resolveGPSAddress = dispatch_group_create();
+    [self refreshTable];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -85,8 +85,10 @@ static NSString *CellIdentifier = @"Cell";
 //Initialize GPS and find location
 -(void)gpsInitialize
 {
+    geocoder = [[CLGeocoder alloc] init];
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
+    [locationManager startUpdatingLocation];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
     locationManager.desiredAccuracy = kCLLocationAccuracyBest; //Can change the GPS Accurancy
@@ -130,24 +132,32 @@ static NSString *CellIdentifier = @"Cell";
              self.longitude = [[NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude] doubleValue];
              self.latitude = [[NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude] doubleValue];
              
-             //Just after we have long & lat start load the Venues in tableView
-             [self loadVenues];
          }
          else
          {
              NSLog(@"%@", error.debugDescription);
          }
+         dispatch_group_leave(resolveGPSAddress);
      }];
+    
+    
 }
 
 #pragma mark - UITableViewDataSource
 - (void)refreshTable
 {
     //TODO: refresh your data
-    [self gpsInitialize];
+    dispatch_group_enter(resolveGPSAddress);
+    [self gpsInitialize]; //Take the new GPS Location
     
-    [self.tableView reloadData];
-    [self.refreshControl endRefreshing];
+    //Wait until the block group finished and run the above code
+    dispatch_group_notify(resolveGPSAddress, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"FINAL BLOCK");
+        [self loadVenues];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    });
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
