@@ -35,6 +35,8 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     self.venueImageView.layer.cornerRadius = self.venueImageView.frame.size.width/2;
+    
+    [self updateUIElements];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +54,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)updateUIElements
+{
+    self.venueTitle.text = self.retrievedVenue.name;
+}
 
 - (IBAction)rateButtonPressed:(UIButton *)sender
 {

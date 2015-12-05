@@ -29,6 +29,7 @@
     NSString *administrativeAreaLock;
     NSString *thoroughfare;
     dispatch_group_t resolveGPSAddress;
+    Venue *currentVenue;
 }
 
 static NSString *CellIdentifier = @"Cell";
@@ -77,8 +78,8 @@ static NSString *CellIdentifier = @"Cell";
     {
         SelectedVenueVC *nextViewController = segue.destinationViewController;
         NSIndexPath *indexPath = sender;
-        //Push the -> objectAtIndex:indexPath.row <- to the new VC
-        //You must push an object from this VC to the nextViewController
+        currentVenue = _venues[indexPath.row];
+        nextViewController.retrievedVenue = currentVenue;
     }
 }
 
@@ -177,9 +178,9 @@ static NSString *CellIdentifier = @"Cell";
     //[tableView registerClass:[VenueTableViewCell class] forCellReuseIdentifier:@"cell"];
     VenueTableViewCell *cell = (VenueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    Venue *venue = _venues[indexPath.row];
-    cell.cellTitleLabel.text = venue.name;
-    cell.cellSubtitleLabel.text = [NSString stringWithFormat:@"%.0fm", venue.location.distance.floatValue];
+    currentVenue = _venues[indexPath.row];
+    cell.cellTitleLabel.text = currentVenue.name;
+    cell.cellSubtitleLabel.text = [NSString stringWithFormat:@"%.0fm", currentVenue.location.distance.floatValue];
     
 //    cell.cellImageView.image = [UIImage imageNamed:@"defaultImage"];
 //    cell.cellImageView.clipsToBounds = YES;

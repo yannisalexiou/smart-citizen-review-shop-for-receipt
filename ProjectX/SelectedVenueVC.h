@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Venue.h"
 
 @protocol SelectedVenueVCDelegate <NSObject>
 
@@ -25,5 +26,7 @@ for example PFObject if you use Parse
  If you need to pass the image from Cell
 @property (strong, nonatomic) UIImage *profileImage;
 */
+
+@property (strong, nonatomic) Venue *retrievedVenue;
 
 @end
