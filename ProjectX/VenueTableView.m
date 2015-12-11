@@ -13,7 +13,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSArray *venues;
+@property (strong, nonatomic) NSArray *venues;
+@property (strong, nonatomic) NSMutableArray *photos;
 
 
 @end
@@ -25,11 +26,22 @@
     CLPlacemark *placemark;
     NSString *textViewLocation;
     BOOL reachableConnection;
-    int *isLinkedToFacebook;
     NSString *administrativeAreaLock;
     NSString *thoroughfare;
+    NSUInteger venuesPhotoCounter;
+    
     dispatch_group_t resolveGPSAddress;
+    dispatch_group_t resolveVenues;
+    dispatch_group_t resolveVenuePhotos;
+    
     Venue *currentVenue;
+    
+    //Restkit Objects
+    NSURL *baseURL;
+    AFHTTPClient *client;
+    RKObjectManager *objectManager;
+    RKObjectMapping *venueMapping;
+    RKObjectMapping *photosMapping;
 }
 
 static NSString *CellIdentifier = @"Cell";
@@ -39,6 +51,7 @@ static NSString *CellIdentifier = @"Cell";
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.photos = [[NSMutableArray alloc] init];
     
     [self configureRestKit];
     
@@ -47,6 +60,8 @@ static NSString *CellIdentifier = @"Cell";
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
     resolveGPSAddress = dispatch_group_create();
+    resolveVenues = dispatch_group_create();
+    resolveVenuePhotos = dispatch_group_create();
     [self refreshTable];
     
     self.tableView.delegate = self;
@@ -100,7 +115,7 @@ static NSString *CellIdentifier = @"Cell";
 //In case of error resolving the address
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"didFailWithError: %@", error);
+    //NSLog(@"didFailWithError: %@", error);
     UIAlertController* alertVC = [UIAlertController alertControllerWithTitle:@"Error" message:@"Failed to Get Your Location" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
     
@@ -110,7 +125,7 @@ static NSString *CellIdentifier = @"Cell";
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"didUpdateToLocation: %@", newLocation);
+    //NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
@@ -140,8 +155,6 @@ static NSString *CellIdentifier = @"Cell";
          }
          dispatch_group_leave(resolveGPSAddress);
      }];
-    
-    
 }
 
 #pragma mark - UITableViewDataSource
@@ -151,10 +164,21 @@ static NSString *CellIdentifier = @"Cell";
     dispatch_group_enter(resolveGPSAddress);
     [self gpsInitialize]; //Take the new GPS Location
     
+    dispatch_group_enter(resolveVenues);
     //Wait until the block group finished and run the above code
     dispatch_group_notify(resolveGPSAddress, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSLog(@"FINAL BLOCK");
+        NSLog(@"resolveGPSAddress");
         [self loadVenues];
+    });
+    
+    dispatch_group_enter(resolveVenuePhotos);
+    dispatch_group_notify(resolveVenues, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"resolveVenues");
+        [self controlVenueAspect];
+    });
+    
+    dispatch_group_notify(resolveVenuePhotos, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"resolveVenuePhotos");
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     });
@@ -179,8 +203,14 @@ static NSString *CellIdentifier = @"Cell";
     VenueTableViewCell *cell = (VenueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     currentVenue = _venues[indexPath.row];
+    currentVenue.photos = _photos[indexPath.row];
+    
     cell.cellTitleLabel.text = currentVenue.name;
     cell.cellSubtitleLabel.text = [NSString stringWithFormat:@"%.0fm", currentVenue.location.distance.floatValue];
+    NSString *photoSize = @"original";
+    NSString *imageFullPath = [NSString stringWithFormat:@"%@%@%@", currentVenue.photos.prefix, photoSize, currentVenue.photos.suffix];
+    cell.cellImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageFullPath]]];
+    NSLog(@"imageFullPath : %@", imageFullPath);
     
 //    cell.cellImageView.image = [UIImage imageNamed:@"defaultImage"];
 //    cell.cellImageView.clipsToBounds = YES;
@@ -216,15 +246,17 @@ static NSString *CellIdentifier = @"Cell";
 - (void)configureRestKit
 {
     // initialize AFNetworking HTTPClient
-    NSURL *baseURL = [NSURL URLWithString:kBaseApiUrl];
-    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    baseURL = [NSURL URLWithString:kBaseApiUrl];
+    client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
     
     // initialize RestKit
-    RKObjectManager *objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
+    objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
     
     // setup object mappings
-    RKObjectMapping *venueMapping = [RKObjectMapping mappingForClass:[Venue class]];
-    [venueMapping addAttributeMappingsFromArray:@[@"name"]];
+    venueMapping = [RKObjectMapping mappingForClass:[Venue class]];
+    //[venueMapping addAttributeMappingsFromArray:@[@"id", @"name"]];
+    [venueMapping addAttributeMappingsFromDictionary:@{@"id" : @"venueId",
+                                                       @"name" : @"name",}];
     
     // register mappings with the provider using a response descriptor
     RKResponseDescriptor *responseDescriptor =
@@ -240,10 +272,21 @@ static NSString *CellIdentifier = @"Cell";
     RKObjectMapping *locationMapping = [RKObjectMapping mappingForClass:[Location class]];
     [locationMapping addAttributeMappingsFromArray:@[@"address", @"city", @"country", @"crossStreet", @"postalCode", @"state", @"distance", @"lat", @"lng"]];
     
+    // define photos object mapping
+    photosMapping = [RKObjectMapping mappingForClass:[Photos class]];
+    //[photosMapping addAttributeMappingsFromArray:@[@"id", @"createdAt", @"prefix", @"suffix", @"visibility"]];
+    [photosMapping addAttributeMappingsFromDictionary:@{@"id" : @"photoId",
+                                                        @"createdAt" : @"createdAt",
+                                                        @"prefix" : @"prefix",
+                                                        @"suffix" : @"suffix",
+                                                        @"visibility" : @"visibility"}];
+    
     // define relationship mapping
     [venueMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"location" toKeyPath:@"location" withMapping:locationMapping]];
+    [venueMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"photos" toKeyPath:@"photos" withMapping:photosMapping]];
 }
 
+//Search Venue
 - (void)loadVenues
 {
     NSString *latitude = [NSString stringWithFormat:@"%f", self.latitude];
@@ -252,14 +295,12 @@ static NSString *CellIdentifier = @"Cell";
     
     NSString *latLon = [NSString stringWithFormat:@"%@,%@", latitude, longitude];
     NSString *addedCategoriesId = [NSString stringWithFormat:@"%@,%@",kFood, kNightlifeSpot];
-    NSString *clientID = kCLIENTID;
-    NSString *clientSecret = kCLIENTSECRET;
     NSString *radius = [NSString stringWithFormat:@"%@", resultRadius];
     
     NSDictionary *queryParams = @{@"ll" : latLon,
-                                  @"client_id" : clientID,
+                                  @"client_id" : kCLIENTID,
                                   @"radius" : radius,
-                                  @"client_secret" : clientSecret,
+                                  @"client_secret" : kCLIENTSECRET,
                                   @"categoryId" : addedCategoriesId,
                                   @"v" : kVersion};
     
@@ -267,10 +308,70 @@ static NSString *CellIdentifier = @"Cell";
                                            parameters:queryParams
                                               success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
                                                   _venues = mappingResult.array;
-                                                  [self.tableView reloadData];
+                                                  venuesPhotoCounter = _venues.count;
+                                                  //[self.tableView reloadData];
+                                                  //[self controlVenueAspect];
+                                                  dispatch_group_leave(resolveVenues);
                                               }
                                               failure:^(RKObjectRequestOperation *operation, NSError *error) {
                                                   NSLog(@"What do you mean by 'there is no coffee?': %@", error);
+                                                  dispatch_group_leave(resolveVenues);
                                               }];
 }
+
+- (void)controlVenueAspect
+{
+    NSLog(@"controlVenueAspect");
+    Venue *venueToUpdate;
+    for (int i=0; i<_venues.count; i++)
+    {
+        venueToUpdate = [_venues objectAtIndex:i];
+        [self requestVenuePhoto:venueToUpdate];
+    }
+    dispatch_group_leave(resolveVenuePhotos);
+}
+
+//Request Photos for Venue
+- (void)requestVenuePhoto:(Venue *)thisVenue
+{
+    NSLog(@"requestVenuePhoto");
+    NSString *venueId = thisVenue.venueId;
+    NSNumber *resultLimit = [NSNumber numberWithInt:1];
+    
+    NSString *resultLimitString = [NSString stringWithFormat:@"%@", resultLimit];
+    
+    // register mappings with the provider using a response descriptor
+    NSString *objectPath = [NSString stringWithFormat:@"/v2/venues/%@/photos", venueId];
+    RKResponseDescriptor *responseDescriptor =
+    [RKResponseDescriptor responseDescriptorWithMapping:photosMapping
+                                                 method:RKRequestMethodGET
+                                            pathPattern:objectPath
+                                                keyPath:@"response.photos.items"
+                                            statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    
+    [objectManager addResponseDescriptor:responseDescriptor];
+    
+    NSDictionary *queryParams = @{@"client_id" : kCLIENTID,
+                                  @"limit" : resultLimitString,
+                                  @"client_secret" : kCLIENTSECRET,
+                                  @"v" : kVersion};
+    
+    [[RKObjectManager sharedManager] getObjectsAtPath:objectPath parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult)
+    {
+        NSLog(@"YOLOO");
+        //_photos = mappingResult.array;
+        [self.photos addObjectsFromArray:mappingResult.array];
+        venuesPhotoCounter++;
+        if (venuesPhotoCounter == _venues.count)
+        {
+            [self.tableView reloadData];
+        }
+        //[self.tableView reloadData];
+        
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"What do you mean by 'there is no photos?': %@", error);
+        dispatch_group_leave(resolveVenuePhotos);
+    }];
+}
+
 @end

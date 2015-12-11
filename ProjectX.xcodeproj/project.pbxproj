@@ -23,6 +23,7 @@
 		8E54B1741BE2D171007F874D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1731BE2D171007F874D /* MapKit.framework */; };
 		8E54B1761BE2D180007F874D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1751BE2D180007F874D /* Foundation.framework */; };
 		8E54B1781BE2D186007F874D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E54B1771BE2D186007F874D /* UIKit.framework */; };
+		8E74030D1C12FEE6000A4426 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E74030C1C12FEE6000A4426 /* Photos.m */; };
 		8E82002C1BE404A0008D2446 /* VenueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */; };
 		8E8A91E31C0CCE8000DD7C50 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8A91E21C0CCE8000DD7C50 /* Venue.m */; };
 		8E8A91E61C0CD02D00DD7C50 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8A91E51C0CD02D00DD7C50 /* Location.m */; };
@@ -76,6 +77,8 @@
 		8E54B1731BE2D171007F874D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8E54B1751BE2D180007F874D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E54B1771BE2D186007F874D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8E74030B1C12FEE6000A4426 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
+		8E74030C1C12FEE6000A4426 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
 		8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueTableViewCell.h; sourceTree = "<group>"; };
 		8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueTableViewCell.m; sourceTree = "<group>"; };
 		8E8A91E11C0CCE8000DD7C50 /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Venue.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				8E8A91E21C0CCE8000DD7C50 /* Venue.m */,
 				8E8A91E41C0CD02D00DD7C50 /* Location.h */,
 				8E8A91E51C0CD02D00DD7C50 /* Location.m */,
+				8E74030B1C12FEE6000A4426 /* Photos.h */,
+				8E74030C1C12FEE6000A4426 /* Photos.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 			files = (
 				8E4728281BE290C6008CD0DC /* VenueTableView.m in Sources */,
 				8E4728251BE290C6008CD0DC /* AppDelegate.m in Sources */,
+				8E74030D1C12FEE6000A4426 /* Photos.m in Sources */,
 				8E8A91E31C0CCE8000DD7C50 /* Venue.m in Sources */,
 				8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */,
 				8E4728221BE290C6008CD0DC /* main.m in Sources */,
