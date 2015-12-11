@@ -32,7 +32,7 @@
     
     dispatch_group_t resolveGPSAddress;
     dispatch_group_t resolveVenues;
-    dispatch_group_t resolveVenuePhotos;
+    dispatch_group_t resolveAllVenuePhotos;
     
     Venue *currentVenue;
     
@@ -61,7 +61,7 @@ static NSString *CellIdentifier = @"Cell";
     
     resolveGPSAddress = dispatch_group_create();
     resolveVenues = dispatch_group_create();
-    resolveVenuePhotos = dispatch_group_create();
+    resolveAllVenuePhotos = dispatch_group_create();
     [self refreshTable];
     
     self.tableView.delegate = self;
@@ -161,6 +161,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)refreshTable
 {
     //TODO: refresh your data
+    venuesPhotoCounter = 0;
     dispatch_group_enter(resolveGPSAddress);
     [self gpsInitialize]; //Take the new GPS Location
     
@@ -171,13 +172,13 @@ static NSString *CellIdentifier = @"Cell";
         [self loadVenues];
     });
     
-    dispatch_group_enter(resolveVenuePhotos);
+    dispatch_group_enter(resolveAllVenuePhotos);
     dispatch_group_notify(resolveVenues, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSLog(@"resolveVenues");
         [self controlVenueAspect];
     });
     
-    dispatch_group_notify(resolveVenuePhotos, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    dispatch_group_notify(resolveAllVenuePhotos, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSLog(@"resolveVenuePhotos");
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
@@ -308,7 +309,6 @@ static NSString *CellIdentifier = @"Cell";
                                            parameters:queryParams
                                               success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
                                                   _venues = mappingResult.array;
-                                                  venuesPhotoCounter = _venues.count;
                                                   //[self.tableView reloadData];
                                                   //[self controlVenueAspect];
                                                   dispatch_group_leave(resolveVenues);
@@ -323,12 +323,11 @@ static NSString *CellIdentifier = @"Cell";
 {
     NSLog(@"controlVenueAspect");
     Venue *venueToUpdate;
-    for (int i=0; i<_venues.count; i++)
+    for (venueToUpdate in _venues)
     {
-        venueToUpdate = [_venues objectAtIndex:i];
         [self requestVenuePhoto:venueToUpdate];
     }
-    dispatch_group_leave(resolveVenuePhotos);
+    
 }
 
 //Request Photos for Venue
@@ -364,13 +363,14 @@ static NSString *CellIdentifier = @"Cell";
         venuesPhotoCounter++;
         if (venuesPhotoCounter == _venues.count)
         {
-            [self.tableView reloadData];
+            //[self.tableView reloadData];
+            dispatch_group_leave(resolveAllVenuePhotos);
         }
+        
         //[self.tableView reloadData];
         
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"What do you mean by 'there is no photos?': %@", error);
-        dispatch_group_leave(resolveVenuePhotos);
     }];
 }
 
