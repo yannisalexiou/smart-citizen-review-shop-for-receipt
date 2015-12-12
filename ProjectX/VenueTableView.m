@@ -14,35 +14,28 @@
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *venues;
-@property (strong, nonatomic) NSMutableArray *photos;
 
+@property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 
 @end
 
 @implementation VenueTableView
 {
-    CLLocationManager *locationManager;
-    CLGeocoder *geocoder;
-    CLPlacemark *placemark;
     NSString *textViewLocation;
     BOOL reachableConnection;
     NSString *administrativeAreaLock;
     NSString *thoroughfare;
     NSUInteger venuesPhotoCounter;
-    
-    dispatch_group_t resolveGPSAddress;
-    dispatch_group_t resolveVenues;
-    dispatch_group_t resolveAllVenuePhotos;
+
+    LocationManager *locationManager;
+    Foursquare_Rest *foursq;
     
     Venue *currentVenue;
-    
-    //Restkit Objects
-    NSURL *baseURL;
-    AFHTTPClient *client;
-    RKObjectManager *objectManager;
-    RKObjectMapping *venueMapping;
-    RKObjectMapping *photosMapping;
+    NSMutableDictionary *mydictionary;
+    NSOperationQueue *operationQueue;
 }
+
+@synthesize venues;
 
 static NSString *CellIdentifier = @"Cell";
 
@@ -50,23 +43,17 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    self.photos = [[NSMutableArray alloc] init];
+
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
-    [self configureRestKit];
-    
+    // Δημιουργούμε το RefreshControl
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
-    resolveGPSAddress = dispatch_group_create();
-    resolveVenues = dispatch_group_create();
-    resolveAllVenuePhotos = dispatch_group_create();
+    // Ξεκινάμε την ενημέρωση του table
     [self refreshTable];
-    
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -87,104 +74,85 @@ static NSString *CellIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"selectedVenueSegue"])
     {
         SelectedVenueVC *nextViewController = segue.destinationViewController;
         NSIndexPath *indexPath = sender;
-        currentVenue = _venues[indexPath.row];
+        currentVenue = venues[indexPath.row];
         nextViewController.retrievedVenue = currentVenue;
     }
 }
 
-//Initialize GPS and find location
--(void)gpsInitialize
-{
-    geocoder = [[CLGeocoder alloc] init];
-    locationManager = [[CLLocationManager alloc] init];
-    [locationManager requestWhenInUseAuthorization];
-    locationManager.delegate = self;
-    locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest; //Can change the GPS Accurancy
-    [locationManager startUpdatingLocation];
+// Ξεκινάμε τους Observers για να "ακούνε" στα notifications
+-(void)addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(gotLocation:)
+                                                 name:kGPSResolvedNotif
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(gotVenues:)
+                                                 name:kVenuesResolvedNotif
+                                               object:nil];
+    
 }
 
-
-#pragma mark - CLLocationManagerDelegate
-//In case of error resolving the address
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    //NSLog(@"didFailWithError: %@", error);
-    UIAlertController* alertVC = [UIAlertController alertControllerWithTitle:@"Error" message:@"Failed to Get Your Location" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
-    
-    [alertVC addAction:defaultAction];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    //NSLog(@"didUpdateToLocation: %@", newLocation);
-    CLLocation *currentLocation = newLocation;
-    
-    if (currentLocation != nil) {
-        //Για άμεση ενημέρωση, προβολή των δεδομένων  όσο το στίγμα του GPS είναι ανοικτό
-        
-    }
-    
-    // Stop Location Manager
-    [locationManager stopUpdatingLocation];
-    
-    NSLog(@"Resolving the Address");
-    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
-     {
-         //NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
-         if (error == nil && [placemarks count] > 0)
-         {
-             placemark = [placemarks lastObject];
-             
-             //Βοηθητικές μεταβλητές που περιέχουν τις συντεταγμένες που πήραμε από το GPS
-             self.longitude = [[NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude] doubleValue];
-             self.latitude = [[NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude] doubleValue];
-             
-         }
-         else
-         {
-             NSLog(@"%@", error.debugDescription);
-         }
-         dispatch_group_leave(resolveGPSAddress);
-     }];
-}
-
-#pragma mark - UITableViewDataSource
 - (void)refreshTable
 {
-    //TODO: refresh your data
-    venuesPhotoCounter = 0;
-    dispatch_group_enter(resolveGPSAddress);
-    [self gpsInitialize]; //Take the new GPS Location
     
-    dispatch_group_enter(resolveVenues);
-    //Wait until the block group finished and run the above code
-    dispatch_group_notify(resolveGPSAddress, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSLog(@"resolveGPSAddress");
-        [self loadVenues];
-    });
+    // Ξεκινάμε τους Observers
+    [self addObservers];
     
-    dispatch_group_enter(resolveAllVenuePhotos);
-    dispatch_group_notify(resolveVenues, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSLog(@"resolveVenues");
-        [self controlVenueAspect];
-    });
+    // Παίρνουμε την τοποθεσία
+    locationManager = [[LocationManager alloc] init];
     
-    dispatch_group_notify(resolveAllVenuePhotos, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSLog(@"resolveVenuePhotos");
-        [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
-    });
     
 }
+
+#pragma mark - Διαχείριση Διαδικασιών
+
+- (void) gotLocation :(NSNotification*) notif {
+    
+    // Αφού πήραμε την τοποθεσία σταματάμε την ενημέρωση
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kGPSResolvedNotif
+                                                  object:nil];
+    
+    NSDictionary *coordinates = notif.userInfo;
+    NSNumber *latitude = [coordinates objectForKey:@"Lat"];
+    NSNumber *longtitude = [coordinates objectForKey:@"Lng"];
+
+    
+    NSLog(@"got Location");
+    
+    
+    // Κάνουμε κλήση στο Foursquare με την τοποθεσία
+    foursq = [[Foursquare_Rest alloc] initWithLat:latitude Long:longtitude];
+    [foursq start];
+}
+
+
+- (void) gotVenues :(NSNotification*) notif{
+    NSLog(@"got Venues");
+
+    // Αφού πήραμε τα Venues σταματάμε την ενημέρωση
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kVenuesResolvedNotif
+                                                  object:nil];
+    
+    NSDictionary *venuesDictionary = notif.userInfo;
+
+    self.venues = [venuesDictionary objectForKey:@"Venues"];
+    
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+}
+
+
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -194,32 +162,94 @@ static NSString *CellIdentifier = @"Cell";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //return 5; //Change this Value
-    return _venues.count;
+    return venues.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellForRowAtIndexPath");
-    //[tableView registerClass:[VenueTableViewCell class] forCellReuseIdentifier:@"cell"];
     VenueTableViewCell *cell = (VenueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    currentVenue = _venues[indexPath.row];
-    currentVenue.photos = _photos[indexPath.row];
+    currentVenue = venues[indexPath.row];
     
     cell.cellTitleLabel.text = currentVenue.name;
     cell.cellSubtitleLabel.text = [NSString stringWithFormat:@"%.0fm", currentVenue.location.distance.floatValue];
-    NSString *photoSize = @"original";
-    NSString *imageFullPath = [NSString stringWithFormat:@"%@%@%@", currentVenue.photos.prefix, photoSize, currentVenue.photos.suffix];
-    cell.cellImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageFullPath]]];
-    NSLog(@"imageFullPath : %@", imageFullPath);
     
-//    cell.cellImageView.image = [UIImage imageNamed:@"defaultImage"];
-//    cell.cellImageView.clipsToBounds = YES;
-//    cell.cellImageView.layer.cornerRadius = cell.cellImageView.frame.size.width/2;
-//    
-//    [cell.cellTitleLabel setText:[NSString stringWithFormat:@"Row %i in Section %i", [indexPath row], [indexPath section]]];
-//    cell.cellSubtitleLabel.text = @"swag";
+    // Τοποθετούμε εξ'ορισμού την Placeholder εικόνα
+    cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
+
+    // Άμα δεν έχει κατέβει ήδη (cached) η φωτογραφία, ξεκινάμε την διαδικασία
+    if (!currentVenue.image)
+    {
+        // Ξεκινάμε να κατεβάζουμε όταν σταματήσει το drag
+        if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
+        {
+            [self startIconDownload:currentVenue forIndexPath:indexPath];
+        }
+        
+        // if a download is deferred or in progress, return a placeholder image
+        cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
+    }
+    else
+    {
+        // Άμα έχει γίνει ήδη cached στη μνήμη τότε την βάζουμε απευθείας
+        cell.imageView.image = currentVenue.image;
+    }
+
     return cell;
+}
+
+
+
+#pragma mark - Table cell image support
+
+// -------------------------------------------------------------------------------
+//	startIconDownload:forIndexPath:
+// -------------------------------------------------------------------------------
+- (void)startIconDownload:(Venue *)venue forIndexPath:(NSIndexPath *)indexPath
+{
+    IconDownloader *iconDownloader = (self.imageDownloadsInProgress)[indexPath];
+    if (iconDownloader == nil)
+    {
+        iconDownloader = [[IconDownloader alloc] init];
+        iconDownloader.venue = venue;
+        [iconDownloader setCompletionHandler:^{
+            
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            
+            // Display the newly loaded image
+            cell.imageView.image = venue.image;
+            
+            // Remove the IconDownloader from the in progress list.
+            // This will result in it being deallocated.
+            [self.imageDownloadsInProgress removeObjectForKey:indexPath];
+            
+        }];
+        (self.imageDownloadsInProgress)[indexPath] = iconDownloader;
+        [iconDownloader startDownload];
+    }
+}
+
+// -------------------------------------------------------------------------------
+//	loadImagesForOnscreenRows
+//  This method is used in case the user scrolled into a set of cells that don't
+//  have their app icons yet.
+// -------------------------------------------------------------------------------
+- (void)loadImagesForOnscreenRows
+{
+    if (self.venues.count > 0)
+    {
+        NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+        for (NSIndexPath *indexPath in visiblePaths)
+        {
+            Venue *venue = (self.venues)[indexPath.row];
+            
+            if (!venue.image)
+                // Avoid the app icon download if the app already has an icon
+            {
+                [self startIconDownload:venue forIndexPath:indexPath];
+            }
+        }
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -243,135 +273,27 @@ static NSString *CellIdentifier = @"Cell";
     
 }
 
-# pragma mark - RestKit & Foursquare Retrieve Methods
-- (void)configureRestKit
-{
-    // initialize AFNetworking HTTPClient
-    baseURL = [NSURL URLWithString:kBaseApiUrl];
-    client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
-    
-    // initialize RestKit
-    objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
-    
-    // setup object mappings
-    venueMapping = [RKObjectMapping mappingForClass:[Venue class]];
-    //[venueMapping addAttributeMappingsFromArray:@[@"id", @"name"]];
-    [venueMapping addAttributeMappingsFromDictionary:@{@"id" : @"venueId",
-                                                       @"name" : @"name",}];
-    
-    // register mappings with the provider using a response descriptor
-    RKResponseDescriptor *responseDescriptor =
-    [RKResponseDescriptor responseDescriptorWithMapping:venueMapping
-                                                 method:RKRequestMethodGET
-                                            pathPattern:kVenueSearchPath
-                                                keyPath:@"response.venues"
-                                            statusCodes:[NSIndexSet indexSetWithIndex:200]];
-    
-    [objectManager addResponseDescriptor:responseDescriptor];
-    
-    // define location object mapping
-    RKObjectMapping *locationMapping = [RKObjectMapping mappingForClass:[Location class]];
-    [locationMapping addAttributeMappingsFromArray:@[@"address", @"city", @"country", @"crossStreet", @"postalCode", @"state", @"distance", @"lat", @"lng"]];
-    
-    // define photos object mapping
-    photosMapping = [RKObjectMapping mappingForClass:[Photos class]];
-    //[photosMapping addAttributeMappingsFromArray:@[@"id", @"createdAt", @"prefix", @"suffix", @"visibility"]];
-    [photosMapping addAttributeMappingsFromDictionary:@{@"id" : @"photoId",
-                                                        @"createdAt" : @"createdAt",
-                                                        @"prefix" : @"prefix",
-                                                        @"suffix" : @"suffix",
-                                                        @"visibility" : @"visibility"}];
-    
-    // define relationship mapping
-    [venueMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"location" toKeyPath:@"location" withMapping:locationMapping]];
-    [venueMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"photos" toKeyPath:@"photos" withMapping:photosMapping]];
-}
+#pragma mark - UIScrollViewDelegate
 
-//Search Venue
-- (void)loadVenues
+// -------------------------------------------------------------------------------
+//	scrollViewDidEndDragging:willDecelerate:
+//  Load images for all onscreen rows when scrolling is finished.
+// -------------------------------------------------------------------------------
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    NSString *latitude = [NSString stringWithFormat:@"%f", self.latitude];
-    NSString *longitude = [NSString stringWithFormat:@"%f", self.longitude];
-    NSNumber *resultRadius = [NSNumber numberWithInt:3000];
-    
-    NSString *latLon = [NSString stringWithFormat:@"%@,%@", latitude, longitude];
-    NSString *addedCategoriesId = [NSString stringWithFormat:@"%@,%@",kFood, kNightlifeSpot];
-    NSString *radius = [NSString stringWithFormat:@"%@", resultRadius];
-    
-    NSDictionary *queryParams = @{@"ll" : latLon,
-                                  @"client_id" : kCLIENTID,
-                                  @"radius" : radius,
-                                  @"client_secret" : kCLIENTSECRET,
-                                  @"categoryId" : addedCategoriesId,
-                                  @"v" : kVersion};
-    
-    [[RKObjectManager sharedManager] getObjectsAtPath:kVenueSearchPath
-                                           parameters:queryParams
-                                              success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                                  _venues = mappingResult.array;
-                                                  //[self.tableView reloadData];
-                                                  //[self controlVenueAspect];
-                                                  dispatch_group_leave(resolveVenues);
-                                              }
-                                              failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                                                  NSLog(@"What do you mean by 'there is no coffee?': %@", error);
-                                                  dispatch_group_leave(resolveVenues);
-                                              }];
-}
-
-- (void)controlVenueAspect
-{
-    NSLog(@"controlVenueAspect");
-    Venue *venueToUpdate;
-    for (venueToUpdate in _venues)
+    if (!decelerate)
     {
-        [self requestVenuePhoto:venueToUpdate];
+        [self loadImagesForOnscreenRows];
     }
-    
 }
 
-//Request Photos for Venue
-- (void)requestVenuePhoto:(Venue *)thisVenue
+// -------------------------------------------------------------------------------
+//	scrollViewDidEndDecelerating:scrollView
+//  When scrolling stops, proceed to load the app icons that are on screen.
+// -------------------------------------------------------------------------------
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"requestVenuePhoto");
-    NSString *venueId = thisVenue.venueId;
-    NSNumber *resultLimit = [NSNumber numberWithInt:1];
-    
-    NSString *resultLimitString = [NSString stringWithFormat:@"%@", resultLimit];
-    
-    // register mappings with the provider using a response descriptor
-    NSString *objectPath = [NSString stringWithFormat:@"/v2/venues/%@/photos", venueId];
-    RKResponseDescriptor *responseDescriptor =
-    [RKResponseDescriptor responseDescriptorWithMapping:photosMapping
-                                                 method:RKRequestMethodGET
-                                            pathPattern:objectPath
-                                                keyPath:@"response.photos.items"
-                                            statusCodes:[NSIndexSet indexSetWithIndex:200]];
-    
-    [objectManager addResponseDescriptor:responseDescriptor];
-    
-    NSDictionary *queryParams = @{@"client_id" : kCLIENTID,
-                                  @"limit" : resultLimitString,
-                                  @"client_secret" : kCLIENTSECRET,
-                                  @"v" : kVersion};
-    
-    [[RKObjectManager sharedManager] getObjectsAtPath:objectPath parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult)
-    {
-        NSLog(@"YOLOO");
-        //_photos = mappingResult.array;
-        [self.photos addObjectsFromArray:mappingResult.array];
-        venuesPhotoCounter++;
-        if (venuesPhotoCounter == _venues.count)
-        {
-            //[self.tableView reloadData];
-            dispatch_group_leave(resolveAllVenuePhotos);
-        }
-        
-        //[self.tableView reloadData];
-        
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"What do you mean by 'there is no photos?': %@", error);
-    }];
+    [self loadImagesForOnscreenRows];
 }
 
 @end

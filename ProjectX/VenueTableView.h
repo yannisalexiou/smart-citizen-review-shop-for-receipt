@@ -16,18 +16,21 @@
 #define kVersion @"20151201"
 
 #import <UIKit/UIKit.h>
+#import "NotificationNames.h"
 #import <RestKit/RestKit.h>
 #import "Venue.h"
 #import "Location.h"
 #import "Photos.h"
 #import "Constants.h"
 #import "MapKit/MapKit.h"
-#import <CoreLocation/CoreLocation.h>
 #import "VenueTableViewCell.h"
 #import "SelectedVenueVC.h"
 #import "VenuesFullMapVC.h"
+#import "LocationManager.h"
+#import "Foursquare+Rest.h"
+#import "IconDownloader.h"
 
-@interface VenueTableView : UIViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface VenueTableView : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) SelectedVenueVC *selectedVenue;
 
