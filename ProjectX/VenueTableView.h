@@ -6,28 +6,22 @@
 //  Copyright © 2015 icsd12004. All rights reserved.
 //
 
-//Client ID
-//XRUE0KJHBVZVKJEX0RCDKCOQXFFTLS4RR0SVVFM30OMEJHTU
-//
-//Client Secret
-//T5JQKCPNIEXD3PUVPFFNRQQNF1V3QLCE0CBDUAFWKJEHJM5A
-#define kCLIENTID @"XRUE0KJHBVZVKJEX0RCDKCOQXFFTLS4RR0SVVFM30OMEJHTU"
-#define kCLIENTSECRET @"T5JQKCPNIEXD3PUVPFFNRQQNF1V3QLCE0CBDUAFWKJEHJM5A"
-#define kVersion @"20151201"
-
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
+#import "MapKit/MapKit.h"
+
 #import "Venue.h"
 #import "Location.h"
 #import "Photos.h"
 #import "Constants.h"
-#import "MapKit/MapKit.h"
-#import "VenueTableViewCell.h"
-#import "SelectedVenueVC.h"
-#import "VenuesFullMapVC.h"
 #import "LocationManager.h"
 #import "Foursquare+Rest.h"
 #import "IconDownloader.h"
+
+#import "VenueTableViewCell.h"
+#import "SelectedVenueVC.h"
+#import "VenuesFullMapVC.h"
+
 
 @interface VenueTableView : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 

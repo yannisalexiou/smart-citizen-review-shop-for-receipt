@@ -173,20 +173,7 @@
 				8E4728241BE290C6008CD0DC /* AppDelegate.m */,
 				8E4728291BE290C6008CD0DC /* Main.storyboard */,
 				8E714A4E1C0DA3A00085FB96 /* Model */,
-				8E4728261BE290C6008CD0DC /* VenueTableView.h */,
-				8E4728271BE290C6008CD0DC /* VenueTableView.m */,
-				EB78FE8A1C1C4A0A002A6D62 /* LocationManager.h */,
-				EB78FE8B1C1C4A0A002A6D62 /* LocationManager.m */,
-				EB78FE8E1C1C5FC5002A6D62 /* Foursquare+Rest.h */,
-				EB78FE8F1C1C5FC5002A6D62 /* Foursquare+Rest.m */,
-				EB6682CB1C1CB8CE00082787 /* IconDownloader.h */,
-				EB6682CC1C1CB8CE00082787 /* IconDownloader.m */,
-				8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */,
-				8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */,
-				8E3C98A21BE2BE59008D21C7 /* VenuesFullMapVC.h */,
-				8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */,
-				8E3C989F1BE2BCC7008D21C7 /* SelectedVenueVC.h */,
-				8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */,
+				8EA72B7B1C1CE91000CF42B8 /* Controller */,
 				8E47282C1BE290C6008CD0DC /* Assets.xcassets */,
 				8E47282E1BE290C6008CD0DC /* LaunchScreen.storyboard */,
 				8E4728311BE290C6008CD0DC /* Info.plist */,
@@ -225,14 +212,13 @@
 		8E714A4E1C0DA3A00085FB96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8E514ED81C0DF10A00829233 /* Constants.h */,
-				8E514ED91C0DF10A00829233 /* Constants.m */,
-				8E8A91E11C0CCE8000DD7C50 /* Venue.h */,
-				8E8A91E21C0CCE8000DD7C50 /* Venue.m */,
-				8E8A91E41C0CD02D00DD7C50 /* Location.h */,
-				8E8A91E51C0CD02D00DD7C50 /* Location.m */,
-				8E74030B1C12FEE6000A4426 /* Photos.h */,
-				8E74030C1C12FEE6000A4426 /* Photos.m */,
+				8EA72B741C1CE8BA00CF42B8 /* Constants */,
+				8EA72B751C1CE8C400CF42B8 /* Venue */,
+				8EA72B761C1CE8CF00CF42B8 /* Location */,
+				8EA72B771C1CE8D800CF42B8 /* Photos */,
+				8EA72B781C1CE8DF00CF42B8 /* LocationManager */,
+				8EA72B791C1CE8E600CF42B8 /* Forsquare_Rest */,
+				8EA72B7A1C1CE8F500CF42B8 /* IconDownloader */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -246,6 +232,84 @@
 				8E54B1711BE2D165007F874D /* CoreLocation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8EA72B741C1CE8BA00CF42B8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				8E514ED81C0DF10A00829233 /* Constants.h */,
+				8E514ED91C0DF10A00829233 /* Constants.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		8EA72B751C1CE8C400CF42B8 /* Venue */ = {
+			isa = PBXGroup;
+			children = (
+				8E8A91E11C0CCE8000DD7C50 /* Venue.h */,
+				8E8A91E21C0CCE8000DD7C50 /* Venue.m */,
+			);
+			name = Venue;
+			sourceTree = "<group>";
+		};
+		8EA72B761C1CE8CF00CF42B8 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				8E8A91E41C0CD02D00DD7C50 /* Location.h */,
+				8E8A91E51C0CD02D00DD7C50 /* Location.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		8EA72B771C1CE8D800CF42B8 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				8E74030B1C12FEE6000A4426 /* Photos.h */,
+				8E74030C1C12FEE6000A4426 /* Photos.m */,
+			);
+			name = Photos;
+			sourceTree = "<group>";
+		};
+		8EA72B781C1CE8DF00CF42B8 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				EB78FE8A1C1C4A0A002A6D62 /* LocationManager.h */,
+				EB78FE8B1C1C4A0A002A6D62 /* LocationManager.m */,
+			);
+			name = LocationManager;
+			sourceTree = "<group>";
+		};
+		8EA72B791C1CE8E600CF42B8 /* Forsquare_Rest */ = {
+			isa = PBXGroup;
+			children = (
+				EB78FE8E1C1C5FC5002A6D62 /* Foursquare+Rest.h */,
+				EB78FE8F1C1C5FC5002A6D62 /* Foursquare+Rest.m */,
+			);
+			name = Forsquare_Rest;
+			sourceTree = "<group>";
+		};
+		8EA72B7A1C1CE8F500CF42B8 /* IconDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				EB6682CB1C1CB8CE00082787 /* IconDownloader.h */,
+				EB6682CC1C1CB8CE00082787 /* IconDownloader.m */,
+			);
+			name = IconDownloader;
+			sourceTree = "<group>";
+		};
+		8EA72B7B1C1CE91000CF42B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E4728261BE290C6008CD0DC /* VenueTableView.h */,
+				8E4728271BE290C6008CD0DC /* VenueTableView.m */,
+				8E82002A1BE404A0008D2446 /* VenueTableViewCell.h */,
+				8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */,
+				8E3C98A21BE2BE59008D21C7 /* VenuesFullMapVC.h */,
+				8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */,
+				8E3C989F1BE2BCC7008D21C7 /* SelectedVenueVC.h */,
+				8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
