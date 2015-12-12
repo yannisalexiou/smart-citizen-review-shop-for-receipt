@@ -13,7 +13,6 @@
 #import "Photos.h"
 
 #import "Constants.h"
-#import "NotificationNames.h"
 
 @interface Foursquare_Rest : NSObject
 

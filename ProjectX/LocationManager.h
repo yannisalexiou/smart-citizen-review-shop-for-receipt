@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NotificationNames.h"
+#import "Constants.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface LocationManager : NSObject <CLLocationManagerDelegate>

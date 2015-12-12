@@ -92,7 +92,6 @@
 		EB6682CC1C1CB8CE00082787 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		EB78FE8A1C1C4A0A002A6D62 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		EB78FE8B1C1C4A0A002A6D62 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
-		EB78FE8D1C1C5C13002A6D62 /* NotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationNames.h; sourceTree = "<group>"; };
 		EB78FE8E1C1C5FC5002A6D62 /* Foursquare+Rest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Foursquare+Rest.h"; sourceTree = "<group>"; };
 		EB78FE8F1C1C5FC5002A6D62 /* Foursquare+Rest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foursquare+Rest.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,7 +173,6 @@
 				8E4728241BE290C6008CD0DC /* AppDelegate.m */,
 				8E4728291BE290C6008CD0DC /* Main.storyboard */,
 				8E714A4E1C0DA3A00085FB96 /* Model */,
-				EB78FE8D1C1C5C13002A6D62 /* NotificationNames.h */,
 				8E4728261BE290C6008CD0DC /* VenueTableView.h */,
 				8E4728271BE290C6008CD0DC /* VenueTableView.m */,
 				EB78FE8A1C1C4A0A002A6D62 /* LocationManager.h */,

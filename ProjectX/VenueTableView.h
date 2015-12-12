@@ -16,7 +16,6 @@
 #define kVersion @"20151201"
 
 #import <UIKit/UIKit.h>
-#import "NotificationNames.h"
 #import <RestKit/RestKit.h>
 #import "Venue.h"
 #import "Location.h"

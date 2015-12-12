@@ -10,6 +10,11 @@
 
 @interface Constants : NSObject
 
+#pragma mark - Notification Names
+#define kGPSResolvedNotif @"GPSAddressResolved"
+#define kVenuesResolvedNotif @"FoursquareVenuesResolved"
+#define kImagesResolvedNotif @"FoursquareImagesResolved"
+
 #pragma mark - Foursquare API
 #define kCLIENTID @"XRUE0KJHBVZVKJEX0RCDKCOQXFFTLS4RR0SVVFM30OMEJHTU"
 #define kCLIENTSECRET @"T5JQKCPNIEXD3PUVPFFNRQQNF1V3QLCE0CBDUAFWKJEHJM5A"
