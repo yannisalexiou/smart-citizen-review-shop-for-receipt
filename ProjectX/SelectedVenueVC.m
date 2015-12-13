@@ -10,7 +10,7 @@
 
 @interface SelectedVenueVC ()
 
-@property (strong, nonatomic) IBOutlet UIView *venueBackgroundImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *venueBackgroundImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *venueImageView;
 @property (strong, nonatomic) IBOutlet UILabel *venueTitle;
 @property (strong, nonatomic) IBOutlet UILabel *venueSubTitle;
@@ -58,6 +58,8 @@
 - (void)updateUIElements
 {
     self.venueTitle.text = self.retrievedVenue.name;
+    self.venueImageView.image = self.retrievedVenue.image;
+    self.venueBackgroundImageView.image = self.retrievedVenue.image;
 }
 
 - (IBAction)rateButtonPressed:(UIButton *)sender
