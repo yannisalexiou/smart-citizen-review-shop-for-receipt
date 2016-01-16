@@ -186,10 +186,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Wu6-cw-A0O">
-                                                    <rect key="frame" x="31" y="30" width="47" height="39"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wu6-cw-A0O">
+                                                    <rect key="frame" x="26" y="31" width="41" height="41"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Back"/>
+                                                    <state key="normal" image="backbutton"/>
                                                     <connections>
                                                         <action selector="backButtonPressed:" destination="1XR-B2-lWO" eventType="touchUpInside" id="QkI-PE-Sri"/>
                                                         <segue destination="gfF-ic-pBU" kind="modal" identifier="backTableVenuesNearYouSegue" id="Zv3-b5-Zfw"/>
@@ -257,6 +257,7 @@
     <resources>
         <image name="Cross" width="200" height="200"/>
         <image name="Success" width="200" height="200"/>
+        <image name="backbutton" width="41" height="41"/>
         <image name="defaultImage" width="700" height="670"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -54,6 +54,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:true];
+    
+    CGAffineTransform translation = CGAffineTransformMakeTranslation(-100, 0);
+}
+
 /*
 #pragma mark - Navigation
 
