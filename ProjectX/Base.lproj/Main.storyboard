@@ -145,33 +145,32 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2vO-KS-9I0">
-                                        <rect key="frame" x="232" y="80" width="56" height="56"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2vO-KS-9I0">
+                                        <rect key="frame" x="208" y="80" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="NO"/>
+                                        <state key="normal" image="Cross"/>
                                         <connections>
                                             <action selector="negativeButtonPressed:" destination="1XR-B2-lWO" eventType="touchUpInside" id="5sp-eG-DTZ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pPt-GX-m1w">
-                                        <rect key="frame" x="32" y="80" width="56" height="56"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Tt-Nv-h4C">
+                                        <rect key="frame" x="237" y="132" width="75" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="YES"/>
+                                        <state key="normal" title="Rate Me"/>
+                                        <connections>
+                                            <action selector="rateButtonPressed:" destination="1XR-B2-lWO" eventType="touchUpInside" id="wEW-0f-Cq5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pPt-GX-m1w">
+                                        <rect key="frame" x="32" y="80" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="Success"/>
                                         <connections>
                                             <action selector="positiveButtonPressed:" destination="1XR-B2-lWO" eventType="touchUpInside" id="eq6-v6-OcC"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Tt-Nv-h4C">
-                                <rect key="frame" x="245" y="493" width="75" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Rate Me"/>
-                                <connections>
-                                    <action selector="rateButtonPressed:" destination="1XR-B2-lWO" eventType="touchUpInside" id="wEW-0f-Cq5"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" id="IDa-qH-FZj" userLabel="Venue BG View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -256,6 +255,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Cross" width="200" height="200"/>
+        <image name="Success" width="200" height="200"/>
         <image name="defaultImage" width="700" height="670"/>
     </resources>
     <inferredMetricsTieBreakers>
