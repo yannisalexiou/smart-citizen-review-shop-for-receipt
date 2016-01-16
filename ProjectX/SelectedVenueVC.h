@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 #import "Venue.h"
+#import <Parse/Parse.h>
 
 @protocol SelectedVenueVCDelegate <NSObject>
 
@@ -29,4 +31,6 @@ for example PFObject if you use Parse
 
 @property (strong, nonatomic) Venue *retrievedVenue;
 
+- (IBAction)negativeButtonPressed:(UIButton *)sender;
+- (IBAction)positiveButtonPressed:(UIButton *)sender;
 @end

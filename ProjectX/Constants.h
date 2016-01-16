@@ -53,4 +53,12 @@ extern NSString *const kProfessionalAndOtherPlaces;
 extern NSString *const kShopAndService;
 extern NSString *const kTravelAndTransport;
 
+#pragma mark Parse Venue Class
+extern NSString *const kVenueClassKey;
+extern NSString *const kFoursquareVenueIdKey;
+
+#pragma mark Parse User Class
+
+#pragma mark Rate Class
+
 @end

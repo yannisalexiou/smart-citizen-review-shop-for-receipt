@@ -44,4 +44,12 @@ NSString *const kProfessionalAndOtherPlaces = @"4d4b7105d754a06375d81259";
 NSString *const kShopAndService = @"4d4b7105d754a06378d81259";
 NSString *const kTravelAndTransport = @"4d4b7105d754a06379d81259";
 
+#pragma mark Parse Venue Class
+NSString *const kVenueClassKey = @"Venue";
+NSString *const kFoursquareVenueIdKey = @"foursquareVenueId";
+
+#pragma mark Parse User Class
+
+#pragma mark Parse Rate Class
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "SelectedVenueVC.h"
+#import <AdSupport/ASIdentifierManager.h>
 
 @interface SelectedVenueVC ()
 
@@ -37,6 +38,10 @@
     self.venueImageView.layer.cornerRadius = self.venueImageView.frame.size.width/2;
     
     [self updateUIElements];
+    [self venueInParse];
+    
+#warning Save this Venue to Parse
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +67,48 @@
     self.venueBackgroundImageView.image = self.retrievedVenue.image;
 }
 
+-(void)userInParse
+{
+    NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
+    [IDFA UUIDString];
+}
+
+-(void) venueInParse
+{
+    PFQuery *queryForVenue = [PFQuery queryWithClassName:kVenueClassKey];
+    [queryForVenue whereKey:kFoursquareVenueIdKey equalTo:self.retrievedVenue.venueId ];
+    [queryForVenue findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error)
+        {
+            //The find succeeded.
+            NSLog(@"SEARCH");
+            
+            if ([[objects mutableCopy] count] == 0)
+            {
+                PFObject *newVenue = [PFObject objectWithClassName:kVenueClassKey];
+                newVenue[kFoursquareVenueIdKey] = self.retrievedVenue.venueId;
+                [newVenue saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded)
+                    {
+                        //Venue stored successfully
+                        NSLog(@"STORED");
+                    }
+                    else
+                    {
+                        //Can't store this Venue
+                    }
+                }];
+
+            }
+        }
+        else
+        {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    }
+
 - (IBAction)rateButtonPressed:(UIButton *)sender
 {
     
@@ -71,5 +118,16 @@
 {
     //[self performSegueWithIdentifier:@"selectedVenueSegue" sender:indexPath];
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (IBAction)negativeButtonPressed:(UIButton *)sender
+{
+    //Rate the Venue Negative
+    //if already voted, update the vote
+}
+
+- (IBAction)positiveButtonPressed:(UIButton *)sender
+{
+    //Rate the Venue Positive
+    //if already voted, update the vote
 }
 @end
