@@ -136,7 +136,12 @@
         }
     }];
     
-    }
+}
+
+-(void) rateInParse
+{
+    
+}
 
 - (IBAction)rateButtonPressed:(UIButton *)sender
 {
