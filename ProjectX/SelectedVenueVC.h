@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Constants.h"
 #import "Venue.h"
+#import "Location.h"
 #import <Parse/Parse.h>
 #import "startTor.h"
 
