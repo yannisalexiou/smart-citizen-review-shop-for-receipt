@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31395DF1C97F943B7299B5F1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE85C46EF8E2D8EBC8EFDF4 /* libPods.a */; };
+		32E3523628D9A1FD5B410307 /* libPods-ProjectX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0ECD45D3C5FBD792C0A2F0 /* libPods-ProjectX.a */; };
 		8E3C98A11BE2BCC7008D21C7 /* SelectedVenueVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */; };
 		8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */; };
 		8E4728221BE290C6008CD0DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728211BE290C6008CD0DC /* main.m */; };
@@ -42,6 +42,7 @@
 		EB6682CD1C1CB8CE00082787 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6682CC1C1CB8CE00082787 /* IconDownloader.m */; };
 		EB78FE8C1C1C4A0A002A6D62 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EB78FE8B1C1C4A0A002A6D62 /* LocationManager.m */; };
 		EB78FE901C1C5FC5002A6D62 /* Foursquare+Rest.m in Sources */ = {isa = PBXBuildFile; fileRef = EB78FE8F1C1C5FC5002A6D62 /* Foursquare+Rest.m */; };
+		EBDF02CF1C4A99F2002ACFCD /* startTor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDF02CE1C4A99F2002ACFCD /* startTor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,9 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		15C2ED8CF6087EC4BC108C7E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		1FE85C46EF8E2D8EBC8EFDF4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		24CCD1901973457A5C12325F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		32CA11DBB0F34AFC02C397C8 /* Pods-ProjectX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectX.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectX/Pods-ProjectX.release.xcconfig"; sourceTree = "<group>"; };
+		7BE1796ACB274751E630A73A /* Pods-ProjectX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectX/Pods-ProjectX.debug.xcconfig"; sourceTree = "<group>"; };
 		8E3C989F1BE2BCC7008D21C7 /* SelectedVenueVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedVenueVC.h; sourceTree = "<group>"; };
 		8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedVenueVC.m; sourceTree = "<group>"; };
 		8E3C98A21BE2BE59008D21C7 /* VenuesFullMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenuesFullMapVC.h; sourceTree = "<group>"; };
@@ -112,12 +112,15 @@
 		8E8A91E21C0CCE8000DD7C50 /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Venue.m; sourceTree = "<group>"; };
 		8E8A91E41C0CD02D00DD7C50 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		8E8A91E51C0CD02D00DD7C50 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		BB0ECD45D3C5FBD792C0A2F0 /* libPods-ProjectX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProjectX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6682CB1C1CB8CE00082787 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		EB6682CC1C1CB8CE00082787 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		EB78FE8A1C1C4A0A002A6D62 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		EB78FE8B1C1C4A0A002A6D62 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		EB78FE8E1C1C5FC5002A6D62 /* Foursquare+Rest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Foursquare+Rest.h"; sourceTree = "<group>"; };
 		EB78FE8F1C1C5FC5002A6D62 /* Foursquare+Rest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foursquare+Rest.m"; sourceTree = "<group>"; };
+		EBDF02CD1C4A99F2002ACFCD /* startTor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = startTor.h; sourceTree = "<group>"; };
+		EBDF02CE1C4A99F2002ACFCD /* startTor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = startTor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +144,7 @@
 				8E7F0FCC1C498F100079EB37 /* Bolts.framework in Frameworks */,
 				8E7F0FCD1C498F100079EB37 /* Parse.framework in Frameworks */,
 				8E54B1741BE2D171007F874D /* MapKit.framework in Frameworks */,
-				31395DF1C97F943B7299B5F1 /* libPods.a in Frameworks */,
+				32E3523628D9A1FD5B410307 /* libPods-ProjectX.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,21 +165,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01E06693D86C61B5D91AAC11 /* Pods */ = {
+		1E17072D0E16ED3D99D0D7D8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				24CCD1901973457A5C12325F /* Pods.debug.xcconfig */,
-				15C2ED8CF6087EC4BC108C7E /* Pods.release.xcconfig */,
+				7BE1796ACB274751E630A73A /* Pods-ProjectX.debug.xcconfig */,
+				32CA11DBB0F34AFC02C397C8 /* Pods-ProjectX.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		1BA98CB2F44A291DCE51C03A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1FE85C46EF8E2D8EBC8EFDF4 /* libPods.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8E4728141BE290C6008CD0DC = {
@@ -187,8 +182,7 @@
 				8E4728391BE290C6008CD0DC /* ProjectXTests */,
 				8E4728441BE290C6008CD0DC /* ProjectXUITests */,
 				8E47281E1BE290C6008CD0DC /* Products */,
-				01E06693D86C61B5D91AAC11 /* Pods */,
-				1BA98CB2F44A291DCE51C03A /* Frameworks */,
+				1E17072D0E16ED3D99D0D7D8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,6 +204,7 @@
 				8E4728291BE290C6008CD0DC /* Main.storyboard */,
 				8E714A4E1C0DA3A00085FB96 /* Model */,
 				8EA72B7B1C1CE91000CF42B8 /* Controller */,
+				EBDF02CB1C4A99DF002ACFCD /* Other Dependencies */,
 				8E47282C1BE290C6008CD0DC /* Assets.xcassets */,
 				8E47282E1BE290C6008CD0DC /* LaunchScreen.storyboard */,
 				8E4728311BE290C6008CD0DC /* Info.plist */,
@@ -278,6 +273,7 @@
 				8E54B1751BE2D180007F874D /* Foundation.framework */,
 				8E54B1731BE2D171007F874D /* MapKit.framework */,
 				8E54B1711BE2D165007F874D /* CoreLocation.framework */,
+				BB0ECD45D3C5FBD792C0A2F0 /* libPods-ProjectX.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -360,6 +356,24 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		EBDF02CB1C4A99DF002ACFCD /* Other Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				EBDF02CC1C4A99E5002ACFCD /* Tor */,
+			);
+			name = "Other Dependencies";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		EBDF02CC1C4A99E5002ACFCD /* Tor */ = {
+			isa = PBXGroup;
+			children = (
+				EBDF02CD1C4A99F2002ACFCD /* startTor.h */,
+				EBDF02CE1C4A99F2002ACFCD /* startTor.m */,
+			);
+			name = Tor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -367,12 +381,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E47284A1BE290C6008CD0DC /* Build configuration list for PBXNativeTarget "ProjectX" */;
 			buildPhases = (
-				EB1150B73DEAF1E45F864375 /* Check Pods Manifest.lock */,
+				DA688AEDFD9E308530B4BD34 /* Check Pods Manifest.lock */,
 				8E4728191BE290C6008CD0DC /* Sources */,
 				8E47281A1BE290C6008CD0DC /* Frameworks */,
 				8E47281B1BE290C6008CD0DC /* Resources */,
-				58FA583B51D1E56FE61DE434 /* Embed Pods Frameworks */,
-				C55EF5FCC12B060D9F15CF3F /* Copy Pods Resources */,
+				57878C162C6C40649F12B922 /* Embed Pods Frameworks */,
+				3D2AFB5323CA1E745D83F9A3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -489,22 +503,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		58FA583B51D1E56FE61DE434 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C55EF5FCC12B060D9F15CF3F /* Copy Pods Resources */ = {
+		3D2AFB5323CA1E745D83F9A3 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -516,10 +515,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProjectX/Pods-ProjectX-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB1150B73DEAF1E45F864375 /* Check Pods Manifest.lock */ = {
+		57878C162C6C40649F12B922 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProjectX/Pods-ProjectX-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA688AEDFD9E308530B4BD34 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -549,6 +563,7 @@
 				EB78FE8C1C1C4A0A002A6D62 /* LocationManager.m in Sources */,
 				8E8A91E31C0CCE8000DD7C50 /* Venue.m in Sources */,
 				8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */,
+				EBDF02CF1C4A99F2002ACFCD /* startTor.m in Sources */,
 				8E4728221BE290C6008CD0DC /* main.m in Sources */,
 				8E3C98A11BE2BCC7008D21C7 /* SelectedVenueVC.m in Sources */,
 				8E8A91E61C0CD02D00DD7C50 /* Location.m in Sources */,
@@ -690,7 +705,7 @@
 		};
 		8E47284B1BE290C6008CD0DC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24CCD1901973457A5C12325F /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 7BE1796ACB274751E630A73A /* Pods-ProjectX.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -708,7 +723,7 @@
 		};
 		8E47284C1BE290C6008CD0DC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15C2ED8CF6087EC4BC108C7E /* Pods.release.xcconfig */;
+			baseConfigurationReference = 32CA11DBB0F34AFC02C397C8 /* Pods-ProjectX.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (

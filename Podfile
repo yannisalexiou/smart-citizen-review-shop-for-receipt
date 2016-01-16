@@ -1,2 +1,5 @@
 platform :ios, '9.2'
-pod 'RestKit'
+target "ProjectX" do
+	pod 'RestKit'
+	pod 'CPAProxy', :git => 'https://github.com/ursachec/CPAProxy.git'
+end

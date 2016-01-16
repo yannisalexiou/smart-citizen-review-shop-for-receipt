@@ -1,5 +1,8 @@
 PODS:
   - AFNetworking (1.3.4)
+  - CocoaAsyncSocket (7.4.2)
+  - CPAProxy (1.1.0):
+    - CocoaAsyncSocket
   - ISO8601DateFormatterValueTransformer (0.6.1):
     - RKValueTransformers (~> 1.1.0)
   - RestKit (0.26.0):
@@ -26,14 +29,28 @@ PODS:
   - TransitionKit (2.2.1)
 
 DEPENDENCIES:
+  - CPAProxy (from `https://github.com/ursachec/CPAProxy.git`)
   - RestKit
+
+EXTERNAL SOURCES:
+  CPAProxy:
+    :git: https://github.com/ursachec/CPAProxy.git
+
+CHECKOUT OPTIONS:
+  CPAProxy:
+    :commit: e09977df8c60413992aac883c7aeb25fdcba43b1
+    :git: https://github.com/ursachec/CPAProxy.git
 
 SPEC CHECKSUMS:
   AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
+  CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
+  CPAProxy: cfd27b25328d6517b1f8570c4f0045838353e888
   ISO8601DateFormatterValueTransformer: 52da467d6ec899d6aedda8e48280ac92e8ee97e6
   RestKit: 112fba5bd1f97598aac0db7981863d5fdc0263a2
   RKValueTransformers: 66ac5e4f077fdbe3496e792d89eeff4c3eb67701
   SOCKit: c7376ac262bea9115b8f749358f762522a47d392
   TransitionKit: 9ceccda4cd0cdc0a05ef85eb235e5a3292c3c250
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 35a898ed4b1de822f80f77e8d737340822af1f8c
+
+COCOAPODS: 1.0.0.beta.2
