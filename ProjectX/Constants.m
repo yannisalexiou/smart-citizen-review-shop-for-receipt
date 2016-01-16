@@ -49,6 +49,8 @@ NSString *const kVenueClassKey = @"Venue";
 NSString *const kFoursquareVenueIdKey = @"foursquareVenueId";
 
 #pragma mark Parse User Class
+NSString *const kUsersClassKey = @"Users";
+NSString *const kUserUniqueIdKey = @"userUniqueId";
 
 #pragma mark Parse Rate Class
 

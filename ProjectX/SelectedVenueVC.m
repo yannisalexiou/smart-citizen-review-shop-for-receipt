@@ -38,9 +38,8 @@
     self.venueImageView.layer.cornerRadius = self.venueImageView.frame.size.width/2;
     
     [self updateUIElements];
-    [self venueInParse];
-    
-#warning Save this Venue to Parse
+    [self venueInParse]; //Store the venue in Parse
+    [self userInParse]; //Store the user in Parse
     
 }
 
@@ -70,7 +69,37 @@
 -(void)userInParse
 {
     NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
-    [IDFA UUIDString];
+    NSString *userId = [IDFA UUIDString];
+    
+    PFQuery *queryForUsers = [PFQuery queryWithClassName:kUsersClassKey];
+    [queryForUsers whereKey:kUserUniqueIdKey equalTo:userId];
+    [queryForUsers findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error)
+        {
+            //The find succeeded.
+            NSLog(@"USER SEARCH");
+            if ([[objects mutableCopy] count] == 0)
+            {
+                PFObject *newUser = [PFObject objectWithClassName:kUsersClassKey];
+                newUser[kUserUniqueIdKey] = userId;
+                [newUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded)
+                    {
+                        //User stored successfully
+                        NSLog(@"USER STORED");
+                    }
+                    else
+                    {
+                        //Can't store this User
+                    }
+                }];
+            }
+        }
+        else
+        {
+            NSLog(@"Error: %@ %@, error", error, [error userInfo]);
+        }
+    }];
 }
 
 -(void) venueInParse
@@ -81,7 +110,7 @@
         if (!error)
         {
             //The find succeeded.
-            NSLog(@"SEARCH");
+            NSLog(@"VENUE SEARCH");
             
             if ([[objects mutableCopy] count] == 0)
             {
@@ -91,7 +120,7 @@
                     if (succeeded)
                     {
                         //Venue stored successfully
-                        NSLog(@"STORED");
+                        NSLog(@"VENUE STORED");
                     }
                     else
                     {

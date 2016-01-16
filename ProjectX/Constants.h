@@ -58,7 +58,9 @@ extern NSString *const kVenueClassKey;
 extern NSString *const kFoursquareVenueIdKey;
 
 #pragma mark Parse User Class
+extern NSString *const kUsersClassKey;
+extern NSString *const kUserUniqueIdKey;
 
-#pragma mark Rate Class
+#pragma mark Parse Rate Class
 
 @end
