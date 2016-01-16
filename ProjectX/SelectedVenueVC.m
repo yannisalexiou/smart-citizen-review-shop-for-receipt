@@ -43,10 +43,7 @@
     
     [self updateUIElements];
     [self venueInParse]; //Store the venue in Parse
-    [self userInParse]; //Store the user in Parse
-    
-    //NSNumber *testNumber = [NSNumber numberWithBool:YES];
-    //[self rateInParse:testNumber];
+    [self userInParse]; //Store the user in Pars
     
     tor = [startTor sharedManager];
 }
