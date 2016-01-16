@@ -24,7 +24,9 @@
 
 @end
 
-@implementation SelectedVenueVC
+@implementation SelectedVenueVC {
+    startTor *tor;
+}
 
 - (void)viewDidLoad
 {
@@ -46,6 +48,7 @@
     NSNumber *testNumber = [NSNumber numberWithBool:YES];
     [self rateInParse:testNumber];
     
+    tor = [startTor sharedManager];
 }
 
 - (void)didReceiveMemoryWarning

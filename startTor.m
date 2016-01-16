@@ -15,6 +15,15 @@
     NSUInteger theSocksPort;
 }
 
++ (id)sharedManager {
+    static startTor *sharedMyManager = nil;
+    @synchronized(self) {
+        if (sharedMyManager == nil)
+            sharedMyManager = [[self alloc] init];
+    }
+    return sharedMyManager;
+}
+
 - (instancetype)init
 {
     self = [super init];

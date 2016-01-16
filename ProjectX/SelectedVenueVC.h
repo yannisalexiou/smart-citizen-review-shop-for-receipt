@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "Venue.h"
 #import <Parse/Parse.h>
+#import "startTor.h"
 
 @protocol SelectedVenueVCDelegate <NSObject>
 

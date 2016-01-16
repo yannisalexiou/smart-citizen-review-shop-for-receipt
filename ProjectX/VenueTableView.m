@@ -33,6 +33,7 @@
     Venue *currentVenue;
     NSMutableDictionary *mydictionary;
     NSOperationQueue *operationQueue;
+    startTor *tor;
 }
 
 @synthesize venues;
@@ -54,6 +55,8 @@ static NSString *CellIdentifier = @"Cell";
     
     // Ξεκινάμε την ενημέρωση του table
     [self refreshTable];
+    
+    tor = [startTor sharedManager];
 }
 
 -(void)viewDidAppear:(BOOL)animated

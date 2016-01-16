@@ -12,4 +12,6 @@
 
 @property (strong,nonatomic) NSURLSession *urlSession;
 
++ (id)sharedManager;
+
 @end
