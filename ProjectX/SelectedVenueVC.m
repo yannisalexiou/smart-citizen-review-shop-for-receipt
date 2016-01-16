@@ -73,7 +73,6 @@
     self.venueImageView.image = self.retrievedVenue.image;
     self.venueBackgroundImageView.image = self.retrievedVenue.image;
     self.venueSubTitle.text = self.retrievedVenue.location.address;
-    self.venueSubTitle.text = self.retrievedVenue.location.address;
 
 }
 
