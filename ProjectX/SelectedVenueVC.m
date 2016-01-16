@@ -46,6 +46,7 @@
     [self userInParse]; //Store the user in Pars
     
     tor = [startTor sharedManager];
+    self.backButtonOutlet.alpha = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,9 +57,17 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:true];
-    
+    //Εφε για το animation του back button
+    self.backButtonOutlet.alpha = 1;
     CGAffineTransform translation = CGAffineTransformMakeTranslation(-100, 0);
+    CGAffineTransform scale = CGAffineTransformMakeScale ( 0.5, 0.5);
+    self.backButtonOutlet.transform = CGAffineTransformConcat ( translation, scale);
+    
+    [UIView animateWithDuration:0.7 delay:0.0 usingSpringWithDamping:0.7 initialSpringVelocity:0.7 options:UIViewAnimationOptionTransitionNone animations:^{
+        CGAffineTransform translation = CGAffineTransformMakeTranslation(0, 0);
+        CGAffineTransform scale = CGAffineTransformMakeScale ( 1, 1);
+        self.backButtonOutlet.transform = CGAffineTransformConcat (translation, scale);
+    } completion:nil];
 }
 
 /*
