@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *venueSubTitle;
 @property (strong, nonatomic) IBOutlet UIButton *backButtonOutlet;
 
+@property (strong, nonatomic) NSString *userId;
+
 - (IBAction)rateButtonPressed:(UIButton *)sender;
 - (IBAction)backButtonPressed:(UIButton *)sender;
 
@@ -40,6 +42,9 @@
     [self updateUIElements];
     [self venueInParse]; //Store the venue in Parse
     [self userInParse]; //Store the user in Parse
+    
+    NSNumber *testNumber = [NSNumber numberWithBool:YES];
+    [self rateInParse:testNumber];
     
 }
 
@@ -70,6 +75,7 @@
 {
     NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
     NSString *userId = [IDFA UUIDString];
+    self.userId = userId;
     
     PFQuery *queryForUsers = [PFQuery queryWithClassName:kUsersClassKey];
     [queryForUsers whereKey:kUserUniqueIdKey equalTo:userId];
@@ -138,9 +144,31 @@
     
 }
 
--(void) rateInParse
+-(void)rateInParse:(NSNumber *)boolToPass
 {
-    
+    PFQuery *queryForRate = [PFQuery queryWithClassName:@"Rate"];
+    [queryForRate whereKey:@"userUniqueId" equalTo:self.userId];
+    [queryForRate whereKey:@"foursquareVenueId" equalTo:self.retrievedVenue.venueId];
+    [queryForRate findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error)
+        {
+            //The find Succeeded
+            NSLog(@"RATE SEARCH");
+            if ([[objects mutableCopy ] count] == 0)
+            {
+                PFObject *rate = [PFObject objectWithClassName:@"Rate"];
+                [rate setObject:self.userId forKey:@"userUniqueId"];
+                [rate setObject:self.retrievedVenue.venueId forKey:@"foursquareVenueId"];
+                [rate setObject:boolToPass forKey:@"takenReceipt"];
+                [rate saveInBackground];
+            }
+            
+        }
+        else
+        {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 - (IBAction)rateButtonPressed:(UIButton *)sender
@@ -157,11 +185,15 @@
 {
     //Rate the Venue Negative
     //if already voted, update the vote
+    NSNumber *thisBool = [NSNumber numberWithBool:NO];
+    [self rateInParse:thisBool];
 }
 
 - (IBAction)positiveButtonPressed:(UIButton *)sender
 {
     //Rate the Venue Positive
     //if already voted, update the vote
+    NSNumber *thisBool = [NSNumber numberWithBool:YES];
+    [self rateInParse:thisBool];
 }
 @end
