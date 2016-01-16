@@ -62,5 +62,9 @@ extern NSString *const kUsersClassKey;
 extern NSString *const kUserUniqueIdKey;
 
 #pragma mark Parse Rate Class
+extern NSString *const kRateClassKey;
+extern NSString *const kRateFoursquareVenueIdKey;
+extern NSString *const kRateUserUniqueIdKey;
+extern NSString *const kRateTakenReceiptKey;
 
 @end

@@ -34,24 +34,28 @@ NSString *const kProviderId = @"providerId";
 NSString *const kLinkedId   = @"linkedId";
 
 #pragma mark Foursquare Category Hierarchy
-NSString *const kArtsAndEntertainment = @"4d4b7104d754a06370d81259";
-NSString *const kCollegeAndUniversity = @"4d4b7105d754a06372d81259";
-NSString *const kEvent = @"4d4b7105d754a06373d81259";
-NSString *const kFood = @"4d4b7105d754a06374d81259";
-NSString *const kNightlifeSpot = @"4d4b7105d754a06376d81259";
-NSString *const kOutdoorsAndRecreation = @"4d4b7105d754a06377d81259";
+NSString *const kArtsAndEntertainment       = @"4d4b7104d754a06370d81259";
+NSString *const kCollegeAndUniversity       = @"4d4b7105d754a06372d81259";
+NSString *const kEvent                      = @"4d4b7105d754a06373d81259";
+NSString *const kFood                       = @"4d4b7105d754a06374d81259";
+NSString *const kNightlifeSpot              = @"4d4b7105d754a06376d81259";
+NSString *const kOutdoorsAndRecreation      = @"4d4b7105d754a06377d81259";
 NSString *const kProfessionalAndOtherPlaces = @"4d4b7105d754a06375d81259";
-NSString *const kShopAndService = @"4d4b7105d754a06378d81259";
-NSString *const kTravelAndTransport = @"4d4b7105d754a06379d81259";
+NSString *const kShopAndService             = @"4d4b7105d754a06378d81259";
+NSString *const kTravelAndTransport         = @"4d4b7105d754a06379d81259";
 
 #pragma mark Parse Venue Class
-NSString *const kVenueClassKey = @"Venue";
-NSString *const kFoursquareVenueIdKey = @"foursquareVenueId";
+NSString *const kVenueClassKey          = @"Venue";
+NSString *const kFoursquareVenueIdKey   = @"foursquareVenueId";
 
 #pragma mark Parse User Class
-NSString *const kUsersClassKey = @"Users";
-NSString *const kUserUniqueIdKey = @"userUniqueId";
+NSString *const kUsersClassKey      = @"Users";
+NSString *const kUserUniqueIdKey    = @"userUniqueId";
 
 #pragma mark Parse Rate Class
+NSString *const kRateClassKey = @"Rate";
+NSString *const kRateFoursquareVenueIdKey   = @"foursquareVenueId";
+NSString *const kRateUserUniqueIdKey        = @"userUniqueId";
+NSString *const kRateTakenReceiptKey        = @"takenReceipt";
 
 @end

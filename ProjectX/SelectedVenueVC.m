@@ -45,8 +45,8 @@
     [self venueInParse]; //Store the venue in Parse
     [self userInParse]; //Store the user in Parse
     
-    NSNumber *testNumber = [NSNumber numberWithBool:YES];
-    [self rateInParse:testNumber];
+    //NSNumber *testNumber = [NSNumber numberWithBool:YES];
+    //[self rateInParse:testNumber];
     
     tor = [startTor sharedManager];
 }
@@ -149,21 +149,33 @@
 
 -(void)rateInParse:(NSNumber *)boolToPass
 {
-    PFQuery *queryForRate = [PFQuery queryWithClassName:@"Rate"];
-    [queryForRate whereKey:@"userUniqueId" equalTo:self.userId];
-    [queryForRate whereKey:@"foursquareVenueId" equalTo:self.retrievedVenue.venueId];
+    PFQuery *queryForRate = [PFQuery queryWithClassName:kRateClassKey];
+    [queryForRate whereKey:kRateUserUniqueIdKey equalTo:self.userId];
+    [queryForRate whereKey:kRateFoursquareVenueIdKey equalTo:self.retrievedVenue.venueId];
     [queryForRate findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error)
         {
             //The find Succeeded
             NSLog(@"RATE SEARCH");
+            //If the first time that user rate this shop
             if ([[objects mutableCopy ] count] == 0)
             {
-                PFObject *rate = [PFObject objectWithClassName:@"Rate"];
-                [rate setObject:self.userId forKey:@"userUniqueId"];
-                [rate setObject:self.retrievedVenue.venueId forKey:@"foursquareVenueId"];
-                [rate setObject:boolToPass forKey:@"takenReceipt"];
+                PFObject *rate = [PFObject objectWithClassName:kRateClassKey];
+                [rate setObject:self.userId forKey:kRateUserUniqueIdKey];
+                [rate setObject:self.retrievedVenue.venueId forKey:kRateFoursquareVenueIdKey];
+                [rate setObject:boolToPass forKey:kRateTakenReceiptKey];
                 [rate saveInBackground];
+            }
+            //If already rated this shop and he wants to change the rate
+            else if ([[objects mutableCopy] count] == 1 )
+            {
+                PFObject *thisObject = [objects objectAtIndex:0];
+                
+                PFQuery *queryForEditRate = [PFQuery queryWithClassName:kRateClassKey];
+                [queryForEditRate getObjectInBackgroundWithId:thisObject.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    object[kRateTakenReceiptKey] = boolToPass;
+                    [object saveInBackground];
+                }];
             }
             
         }
