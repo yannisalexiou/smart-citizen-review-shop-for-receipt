@@ -102,6 +102,7 @@
                     else
                     {
                         //Can't store this User
+                        [self alertView:@"Error" andMessage:@"Can't Store The User"];
                     }
                 }];
             }
@@ -109,6 +110,7 @@
         else
         {
             NSLog(@"Error: %@ %@, error", error, [error userInfo]);
+            [self alertView:@"Error" andMessage:@"Error Searching for User"];
         }
     }];
 }
@@ -136,6 +138,7 @@
                     else
                     {
                         //Can't store this Venue
+                        [self alertView:@"Error" andMessage:@"Can't Store The Venue"];
                     }
                 }];
 
@@ -144,6 +147,7 @@
         else
         {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self alertView:@"Error" andMessage:@"Can't Find The Venue"];
         }
     }];
     
@@ -184,8 +188,19 @@
         else
         {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self alertView:@"Error" andMessage:@"Can't Rate Right Now"];
         }
     }];
+}
+
+-(void)alertView:(NSString *)title andMessage:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:ok];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)rateButtonPressed:(UIButton *)sender
