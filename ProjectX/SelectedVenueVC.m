@@ -16,8 +16,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *venueTitle;
 @property (strong, nonatomic) IBOutlet UILabel *venueSubTitle;
 @property (strong, nonatomic) IBOutlet UIButton *backButtonOutlet;
+@property (strong, nonatomic) IBOutlet UILabel *positiveRatesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *negativeRatesLabel;
 
 @property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSMutableArray *ratesForVenue;
+@property (strong, nonatomic) NSNumber *positiveRatesCounter;
+@property (strong, nonatomic) NSNumber *negativeRatesCounter;
 
 - (IBAction)rateButtonPressed:(UIButton *)sender;
 - (IBAction)backButtonPressed:(UIButton *)sender;
@@ -41,9 +46,15 @@
     
     self.venueImageView.layer.cornerRadius = self.venueImageView.frame.size.width/2;
     
+    self.positiveRatesCounter = [NSNumber numberWithInt:0];
+    self.negativeRatesCounter = [NSNumber numberWithInt:0];
+    self.positiveRatesLabel.text = @"No Rates";
+    self.negativeRatesLabel.text = @"No Rates";
+    
     [self updateUIElements];
     [self venueInParse]; //Store the venue in Parse
     [self userInParse]; //Store the user in Pars
+    [self countRates]; //Count and return how many rate yes and no
     
     tor = [startTor sharedManager];
     self.backButtonOutlet.alpha = 0;
@@ -86,6 +97,12 @@
     self.venueImageView.image = self.retrievedVenue.image;
     self.venueBackgroundImageView.image = self.retrievedVenue.image;
     self.venueSubTitle.text = self.retrievedVenue.location.address;
+    
+    if (self.positiveRatesCounter > 0) self.positiveRatesLabel.text = [NSString stringWithFormat:@"%@", self.positiveRatesCounter];
+    else self.positiveRatesLabel.text = @"No Rates";
+    
+    if (self.negativeRatesCounter > 0) self.negativeRatesLabel.text = [NSString stringWithFormat:@"%@", self.negativeRatesCounter];
+    else self.negativeRatesLabel.text = @"No Rates";
 
 }
 
@@ -205,6 +222,48 @@
         {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             [self alertView:@"Error" andMessage:@"Can't Rate Right Now"];
+        }
+    }];
+}
+
+-(void)countRates
+{
+    PFQuery *countPositiveReceiptRatesForVenue = [PFQuery queryWithClassName:kRateClassKey];
+    [countPositiveReceiptRatesForVenue whereKey:kRateFoursquareVenueIdKey equalTo:self.retrievedVenue.venueId];
+    [countPositiveReceiptRatesForVenue whereKey:kRateTakenReceiptKey equalTo:@YES];
+    [countPositiveReceiptRatesForVenue findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error)
+        {
+            //The Find Succeeded
+            NSLog(@"COUNT SEARCH");
+            self.ratesForVenue = [objects mutableCopy];
+            self.positiveRatesCounter = [NSNumber numberWithInt:[self.ratesForVenue count]];
+            [self updateUIElements];
+            
+        }
+        else
+        {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self alertView:@"Error" andMessage:@"Can't Find The Venue"];
+        }
+    }];
+    
+    PFQuery *countNegativeReceiptRatesForVenue = [PFQuery queryWithClassName:kRateClassKey];
+    [countNegativeReceiptRatesForVenue whereKey:kRateFoursquareVenueIdKey equalTo:self.retrievedVenue.venueId];
+    [countNegativeReceiptRatesForVenue whereKey:kRateTakenReceiptKey equalTo:@NO];
+    [countNegativeReceiptRatesForVenue findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error)
+        {
+            //The Find Succeeded
+            NSLog(@"COUNT SEARCH");
+            self.ratesForVenue = [objects mutableCopy];
+            self.negativeRatesCounter = [NSNumber numberWithInt:[self.ratesForVenue count]];
+            [self updateUIElements];
+        }
+        else
+        {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self alertView:@"Error" andMessage:@"Can't Find The Venue"];
         }
     }];
 }

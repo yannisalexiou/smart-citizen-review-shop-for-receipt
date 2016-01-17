@@ -170,6 +170,20 @@
                                             <action selector="positiveButtonPressed:" destination="1XR-B2-lWO" eventType="touchUpInside" id="eq6-v6-OcC"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EdL-YJ-YBt">
+                                        <rect key="frame" x="51" y="174" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MdW-0v-UEW">
+                                        <rect key="frame" x="227" y="174" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" id="IDa-qH-FZj" userLabel="Venue BG View">
@@ -226,6 +240,8 @@
                     <navigationItem key="navigationItem" id="Auk-ld-uap"/>
                     <connections>
                         <outlet property="backButtonOutlet" destination="Wu6-cw-A0O" id="Dqi-Lq-4Lg"/>
+                        <outlet property="negativeRatesLabel" destination="MdW-0v-UEW" id="c5m-PQ-10S"/>
+                        <outlet property="positiveRatesLabel" destination="EdL-YJ-YBt" id="FPm-xZ-Xc9"/>
                         <outlet property="venueBackgroundImageView" destination="YwK-8z-9i4" id="RNZ-He-5Bc"/>
                         <outlet property="venueImageView" destination="v78-Rj-hfL" id="rFg-Mu-0b7"/>
                         <outlet property="venueSubTitle" destination="VJj-ZP-FBO" id="qTN-Hp-RqX"/>
