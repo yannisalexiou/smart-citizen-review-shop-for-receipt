@@ -26,11 +26,15 @@
     NSString *thoroughfare;
 }
 
+@synthesize mapView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self addVenuesToMap];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +50,27 @@
     geocoder = [[CLGeocoder alloc] init];
     [locationManager requestWhenInUseAuthorization];
     [locationManager startUpdatingLocation];
+
+
+}
+
+- (void) addVenuesToMap {
     
+    for (Venue* venue in self.Venues) {
+        NSLog(@"adding %@ to map", venue.name);
+        
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        
+        CLLocationCoordinate2D coord;
+        coord.latitude = (CLLocationDegrees)[venue.location.lat doubleValue];
+        coord.longitude = (CLLocationDegrees)[venue.location.lng doubleValue];
+        point.coordinate = coord;
+        
+        point.title = venue.name;
+        point.subtitle = [venue.location.distance stringValue];
+        
+        [self.mapView addAnnotation:point];
+    }
 }
 
 //Initialize GPS and find location
@@ -112,15 +136,6 @@
              MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.coordinate, 600, 400);
              [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
              self.mapView.showsUserLocation = YES;
-             /*
-              // Add an annotation
-              MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-              point.coordinate = self.coordinate;
-              point.title = self.titleString;
-              point.subtitle = self.subtitleString;
-              [self.mapViewCurrentPosition addAnnotation:point]; //Τοποθέτηση πινέζας
-              [self.mapViewCurrentPosition selectAnnotation:point animated:YES]; //Να εμφανίζεται πάντα ο τίτλος και ο υπότιτλος
-              */
              
              textViewLocation = [NSString stringWithFormat:@"%@, %@", placemark.thoroughfare,placemark.administrativeArea];
              //This will help us to lock the usability of our application to kGASubmitAdministrativeAreaSamos.
@@ -132,9 +147,14 @@
                  self.navigationItem.title = [NSString stringWithFormat:@"%@", placemark.thoroughfare];
              }
              
-             
              //Εδω θα μπει σε if (administrativeAreaLock != kGASubmitAdministrativeAreaSamos στην τελική φάση της εφαρμογής
              //self.commentTextView.text = textViewLocation;<----------------------
+             
+
+             MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 5000, 5000);
+             MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+             [self.mapView setRegion:adjustedRegion animated:YES];
+             
          } else {
              NSLog(@"%@", error.debugDescription);
          }

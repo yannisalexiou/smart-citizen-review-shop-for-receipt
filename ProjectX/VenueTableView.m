@@ -86,6 +86,10 @@ static NSString *CellIdentifier = @"Cell";
         currentVenue = venues[indexPath.row];
         nextViewController.retrievedVenue = currentVenue;
     }
+    else if ([[segue identifier] isEqualToString:@"mapViewSegue"]) {
+        VenuesFullMapVC *venuesMapController = segue.destinationViewController;
+        venuesMapController.Venues = venues;
+    }
 }
 
 // Ξεκινάμε τους Observers για να "ακούνε" στα notifications
@@ -275,6 +279,7 @@ static NSString *CellIdentifier = @"Cell";
     //    [self.navigationController pushViewController:pushVC animated:YES];
     
 }
+
 
 #pragma mark - UIScrollViewDelegate
 

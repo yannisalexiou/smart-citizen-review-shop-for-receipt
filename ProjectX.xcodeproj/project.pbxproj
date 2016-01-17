@@ -39,6 +39,7 @@
 		8E82002C1BE404A0008D2446 /* VenueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E82002B1BE404A0008D2446 /* VenueTableViewCell.m */; };
 		8E8A91E31C0CCE8000DD7C50 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8A91E21C0CCE8000DD7C50 /* Venue.m */; };
 		8E8A91E61C0CD02D00DD7C50 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8A91E51C0CD02D00DD7C50 /* Location.m */; };
+		EB55A38D1C4BC16100542B2A /* SPAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EB55A38C1C4BC16100542B2A /* SPAnnotation.m */; };
 		EB6682CD1C1CB8CE00082787 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6682CC1C1CB8CE00082787 /* IconDownloader.m */; };
 		EB78FE8C1C1C4A0A002A6D62 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EB78FE8B1C1C4A0A002A6D62 /* LocationManager.m */; };
 		EB78FE901C1C5FC5002A6D62 /* Foursquare+Rest.m in Sources */ = {isa = PBXBuildFile; fileRef = EB78FE8F1C1C5FC5002A6D62 /* Foursquare+Rest.m */; };
@@ -113,6 +114,8 @@
 		8E8A91E41C0CD02D00DD7C50 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		8E8A91E51C0CD02D00DD7C50 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		BB0ECD45D3C5FBD792C0A2F0 /* libPods-ProjectX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProjectX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB55A38B1C4BC16100542B2A /* SPAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAnnotation.h; sourceTree = "<group>"; };
+		EB55A38C1C4BC16100542B2A /* SPAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAnnotation.m; sourceTree = "<group>"; };
 		EB6682CB1C1CB8CE00082787 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		EB6682CC1C1CB8CE00082787 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		EB78FE8A1C1C4A0A002A6D62 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 				8E3C98A31BE2BE59008D21C7 /* VenuesFullMapVC.m */,
 				8E3C989F1BE2BCC7008D21C7 /* SelectedVenueVC.h */,
 				8E3C98A01BE2BCC7008D21C7 /* SelectedVenueVC.m */,
+				EB55A38B1C4BC16100542B2A /* SPAnnotation.h */,
+				EB55A38C1C4BC16100542B2A /* SPAnnotation.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 				8E74030D1C12FEE6000A4426 /* Photos.m in Sources */,
 				EB78FE8C1C1C4A0A002A6D62 /* LocationManager.m in Sources */,
 				8E8A91E31C0CCE8000DD7C50 /* Venue.m in Sources */,
+				EB55A38D1C4BC16100542B2A /* SPAnnotation.m in Sources */,
 				8E3C98A41BE2BE59008D21C7 /* VenuesFullMapVC.m in Sources */,
 				EBDF02CF1C4A99F2002ACFCD /* startTor.m in Sources */,
 				8E4728221BE290C6008CD0DC /* main.m in Sources */,

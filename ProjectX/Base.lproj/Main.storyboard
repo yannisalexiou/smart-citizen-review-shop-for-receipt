@@ -18,7 +18,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationLevel="1" indentationWidth="10" reuseIdentifier="Cell" rowHeight="90" id="Pqx-wK-7KB" customClass="VenueTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="90"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pqx-wK-7KB" id="DD2-Ig-eIY">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
@@ -67,10 +67,11 @@
                     <navigationItem key="navigationItem" title="Venues Nearby" id="uGa-Jd-dxY">
                         <barButtonItem key="rightBarButtonItem" image="MapViewButton" id="BUq-g3-Lq8">
                             <connections>
-                                <segue destination="M4h-lF-oye" kind="modal" id="Uj1-yU-QjJ"/>
+                                <segue destination="M4h-lF-oye" kind="modal" identifier="mapViewSegue" id="Uj1-yU-QjJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="rrw-3I-yW3" id="nfC-an-X3V"/>
                         <outlet property="venuesTableView" destination="rrw-3I-yW3" id="x3c-Rj-HqG"/>
