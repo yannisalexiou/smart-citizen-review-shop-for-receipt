@@ -21,7 +21,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pqx-wK-7KB" id="DD2-Ig-eIY">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mks-62-WnZ">
@@ -65,7 +65,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Venues Nearby" id="uGa-Jd-dxY">
-                        <barButtonItem key="rightBarButtonItem" title="CV" id="BUq-g3-Lq8">
+                        <barButtonItem key="rightBarButtonItem" image="MapViewButton" id="BUq-g3-Lq8">
                             <connections>
                                 <segue destination="M4h-lF-oye" kind="modal" id="Uj1-yU-QjJ"/>
                             </connections>
@@ -103,9 +103,9 @@
                                         <color key="barTintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <items>
                                             <navigationItem title="Map" id="IJi-G0-5bs">
-                                                <barButtonItem key="rightBarButtonItem" title="CV" id="NIe-Uw-mgN">
+                                                <barButtonItem key="rightBarButtonItem" title="Done" id="NIe-Uw-mgN">
                                                     <connections>
-                                                        <segue destination="gfF-ic-pBU" kind="modal" identifier="backTableVenuesNearYouSegue" id="tbM-6f-dUb"/>
+                                                        <action selector="DonebuttonPressed:" destination="M4h-lF-oye" id="a44-83-icB"/>
                                                     </connections>
                                                 </barButtonItem>
                                             </navigationItem>
@@ -142,7 +142,7 @@
                                         <rect key="frame" x="32" y="23" width="256" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2vO-KS-9I0">
@@ -256,12 +256,10 @@
     </scenes>
     <resources>
         <image name="Cross" width="200" height="200"/>
+        <image name="MapViewButton" width="22" height="33"/>
         <image name="Success" width="200" height="200"/>
         <image name="backbutton" width="41" height="41"/>
         <image name="defaultImage" width="700" height="670"/>
         <image name="leftArrow" width="32" height="32"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Zv3-b5-Zfw"/>
-    </inferredMetricsTieBreakers>
 </document>

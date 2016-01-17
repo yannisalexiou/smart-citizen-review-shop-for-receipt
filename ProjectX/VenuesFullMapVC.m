@@ -141,6 +141,9 @@
      }
      ];
 }
+- (IBAction)DonebuttonPressed:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
+}
 
 /*
  #pragma mark - Navigation
