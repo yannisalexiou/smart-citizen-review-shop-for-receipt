@@ -42,10 +42,10 @@
                                                     <rect key="frame" x="8" y="8" width="67" height="67"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oJN-hE-ujm">
-                                                    <rect key="frame" x="277" y="27" width="30" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oJN-hE-ujm">
+                                                    <rect key="frame" x="276" y="26" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="√"/>
+                                                    <state key="normal" image="leftArrow"/>
                                                     <connections>
                                                         <action selector="cellRightButtonPressed:" destination="Pqx-wK-7KB" eventType="touchUpInside" id="g0n-up-VQc"/>
                                                     </connections>
@@ -259,6 +259,7 @@
         <image name="Success" width="200" height="200"/>
         <image name="backbutton" width="41" height="41"/>
         <image name="defaultImage" width="700" height="670"/>
+        <image name="leftArrow" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Zv3-b5-Zfw"/>

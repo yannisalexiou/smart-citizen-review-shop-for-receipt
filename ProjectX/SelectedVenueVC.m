@@ -184,6 +184,8 @@
                 [rate setObject:self.retrievedVenue.venueId forKey:kRateFoursquareVenueIdKey];
                 [rate setObject:boolToPass forKey:kRateTakenReceiptKey];
                 [rate saveInBackground];
+                
+                [self backButtonPressed:nil];
             }
             //If already rated this shop and he wants to change the rate
             else if ([[objects mutableCopy] count] == 1 )
@@ -194,6 +196,8 @@
                 [queryForEditRate getObjectInBackgroundWithId:thisObject.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
                     object[kRateTakenReceiptKey] = boolToPass;
                     [object saveInBackground];
+                    
+                    [self backButtonPressed:nil];
                 }];
             }
             
